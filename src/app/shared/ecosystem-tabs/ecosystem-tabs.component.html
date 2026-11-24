@@ -1,0 +1,496 @@
+<section class="ecosystem-section" [attr.id]="sectionId()" [attr.aria-labelledby]="headingId()">
+  <div class="ecosystem-container ds-container">
+    <header class="ecosystem-header">
+      <!-- Pages project their own eyebrow, h2 (with the headingId) and subtitle; home uses this default. -->
+      <ng-content select="[ecosystemHeader]">
+        <p class="eyebrow">Explore the WorldPosta ecosystem</p>
+        <h2 id="ecosystem-section-heading">
+          One Platform.<br />
+          <span class="highlight">Every Tool</span> Your Business Runs On.
+        </h2>
+        <p class="subtitle">
+          From business communication and collaboration to secure, scalable cloud infrastructure,
+          WorldPosta gives you everything you need, in one connected ecosystem.
+        </p>
+      </ng-content>
+    </header>
+
+    <div class="ecosystem-surface" [class.ecosystem-surface--home]="homeMode()">
+      <app-service-picker
+        [service]="activeTab()"
+        [count]="serviceCount()"
+        [open]="pickerOpen()"
+        controls="service-tablist"
+        (toggled)="togglePicker()"
+      />
+
+      <div class="tabs-collapse" [class.is-open]="pickerOpen()">
+      <!-- One tablist per group, labelled by its heading: a single tablist
+           can't own the headings. Each group keeps its own Tab stop. A plain
+           div, not an aside, so it doesn't nest a landmark inside main. -->
+      <div id="service-tablist" class="tabs-sidebar">
+        <div class="tabs-sidebar__inner">
+        @if (homeMode()) {
+          <div class="home-categories" role="group" aria-label="Service category">
+            <button type="button" [class.active]="homeCategory() === 'cloud-infrastructure'" [attr.aria-pressed]="homeCategory() === 'cloud-infrastructure'" (click)="selectCategory('cloud-infrastructure')">CloudEdge</button>
+            <button type="button" [class.active]="homeCategory() === 'collaboration'" [attr.aria-pressed]="homeCategory() === 'collaboration'" (click)="selectCategory('collaboration')">Posta Workspace</button>
+          </div>
+        }
+        @for (group of visibleGroups(); track group.id) {
+          <div class="tab-group">
+            <h3 class="tab-group-label" [id]="'tab-group-' + group.id" [class.sr-only]="homeMode() && group.id !== 'management'">{{ homeMode() && group.id === 'cloud-infrastructure' ? 'CloudEdge' : homeMode() && group.id === 'collaboration' ? 'Posta Workspace' : group.label }}</h3>
+            <div class="tab-group-items" role="tablist" aria-orientation="vertical" [attr.aria-labelledby]="'tab-group-' + group.id">
+              @for (item of group.items; track item.id; let i = $index) {
+                <button
+                  [id]="'tab-' + item.id"
+                  class="tab-button"
+                  [class.active]="activeTabId() === item.id"
+                  role="tab"
+                  [attr.aria-selected]="activeTabId() === item.id"
+                  [attr.aria-controls]="'tabpanel-' + item.id"
+                  [attr.tabindex]="isTabStop(group, i) ? 0 : -1"
+                  (click)="setActiveTab(item.id)"
+                  (keydown)="handleKeydown($event, group.id, i)"
+                >
+                  <fa-icon [icon]="item.icon" aria-hidden="true" />
+                  <span>{{ item.label }}</span>
+                  <fa-icon class="tab-button__chevron" [icon]="icons.chevronRight" aria-hidden="true" />
+                </button>
+              }
+            </div>
+          </div>
+        }
+        </div>
+      </div>
+      </div>
+
+      <div
+        class="tab-panel"
+        [class.tab-panel--visual-first]="!!tabContent().calendar"
+        [id]="'tabpanel-' + activeTabId()"
+        role="tabpanel"
+        [attr.aria-labelledby]="'tab-' + activeTabId()"
+        [attr.tabindex]="0"
+      >
+        @if (placeholder()) {
+          <div class="eco-placeholder">
+            <span class="eco-placeholder__icon"><fa-icon [icon]="activeIcon()" aria-hidden="true" /></span>
+            <p class="eco-placeholder__eyebrow">Management preview</p>
+            <h3>{{ activeTab().label }}</h3>
+            <p>This interactive preview is being prepared.</p>
+          </div>
+        } @else if (screen() || liveMode()) {
+          <div class="eco-shot">
+            @if (!homeMode()) {
+            <div class="eco-shot__head">
+              <div class="eco-shot__copy">
+                <span class="badge">
+                  <span class="badge-icon"><fa-icon [icon]="activeIcon()" aria-hidden="true" /></span>
+                  {{ tabContent().badge }}
+                </span>
+                <h3>{{ tabContent().heading }}</h3>
+                <p class="description">{{ tabContent().description }}</p>
+              </div>
+              <div class="actions eco-shot__actions">
+                <a class="btn-primary" href="https://admin.worldposta.com/auth/register" target="_blank" rel="noopener noreferrer">
+                  {{ tabContent().cta ?? 'Get started' }}
+                  <fa-icon [icon]="icons.arrowRight" aria-hidden="true" />
+                <span class="sr-only">(opens in a new tab)</span></a>
+              </div>
+            </div>
+            }
+            @if (liveMode(); as live) {
+              <figure class="eco-shot__window eco-shot__window--live">
+                <div class="eco-shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>{{ demos[live].title }}</span><em class="eco-live">Try it · demo data</em></div>
+                <!-- The product's own page, working on demo data. Its code loads the first time its tab opens. -->
+                @if (liveComponent.value(); as demo) {
+                  <ng-container *ngComponentOutlet="demo" />
+                } @else if (liveComponent.error()) {
+                  <div class="eco-demo-loading" role="status">This demo could not load. Refresh the page to try again.</div>
+                } @else {
+                  <div class="eco-demo-loading" role="status">Loading {{ demos[live].title }}…</div>
+                }
+              </figure>
+            } @else if (screen(); as shot) {
+            <figure class="eco-shot__window" [class.eco-shot__window--scene]="shot.scene">
+              <div class="eco-shot__bar" aria-hidden="true" [hidden]="shot.scene"><i></i><i></i><i></i><span>{{ shot.title }}</span>@if (shot.actions.length) {<em class="eco-live">Click the buttons</em>}</div>
+              @if (meeting()) {
+                <app-link-meeting />
+              } @else {
+              <div class="eco-shot__stage">
+                <!-- A plain img: the source and its intrinsic size change with the service. -->
+                <img [src]="shot.src" [attr.width]="shot.width" [attr.height]="shot.height" [alt]="shot.alt" loading="lazy" decoding="async" />
+                <!-- The console's own sidebar, made clickable where a matching service exists. -->
+                @for (item of shot.nav; track item.tab) {
+                  <button
+                    type="button"
+                    class="eco-nav"
+                    [class.eco-nav--current]="item.current"
+                    [style.top]="item.top"
+                    [style.height]="item.height"
+                    [style.width]="item.width"
+                    [attr.aria-label]="'Open ' + item.label"
+                    [attr.aria-current]="item.current ? 'page' : null"
+                    (click)="setActiveTab(item.tab)"
+                  ></button>
+                }
+                <!-- The screenshot's own buttons, made clickable. -->
+                @for (act of shot.actions; track act.label) {
+                  <button
+                    type="button"
+                    class="eco-act"
+                    [style.left]="act.left"
+                    [style.top]="act.top"
+                    [style.width]="act.width"
+                    [style.height]="act.height"
+                    [attr.aria-label]="act.label"
+                    [title]="act.label"
+                    (click)="runAction(act)"
+                  ></button>
+                }
+                @if (actionNote(); as note) {
+                  <p class="eco-act-note" role="status"><strong>{{ note.label }}</strong><span>{{ note.text }}</span></p>
+                }
+              </div>
+              }
+            </figure>
+            }
+            @if (!liveMode()) {
+            <ul class="eco-shot__bullets eco-shot__bullets--plain" aria-label="Key features">
+              @for (bullet of tabContent().bullets; track $index) {
+                <li class="eco-shot__bullet"><span class="eco-shot__tick" aria-hidden="true"></span><span>{{ bullet }}</span></li>
+              }
+            </ul>
+            }
+          </div>
+        } @else {
+        <div class="panel-main" [class.panel-main--wide]="tabContent().layout === 'wide'">
+          <div class="panel-copy">
+            <span class="badge">
+              <span class="badge-icon"><fa-icon [icon]="activeIcon()" aria-hidden="true" /></span>
+              {{ tabContent().badge }}
+            </span>
+            <h3>{{ tabContent().heading }}</h3>
+            <p class="description">{{ tabContent().description }}</p>
+
+            @if (tabContent().headerAction; as action) {
+              <a class="panel-copy__action" href="#action">
+                <fa-icon [icon]="tabContent().headerActionIcon ?? icons.plus" aria-hidden="true" />
+                {{ action }}
+              </a>
+            }
+
+            @if (tabContent().layout !== 'wide') {
+            <ul class="bullet-list" aria-label="Key features">
+              <!-- Positional slots: the three bullets swap wholesale between tabs, so
+                   index-tracking reuses the nodes instead of rebuilding the list. -->
+              @for (bullet of tabContent().bullets; track $index) {
+                <li>
+                  <fa-icon [icon]="icons.check" aria-hidden="true" />
+                  <span>{{ bullet }}</span>
+                </li>
+              }
+            </ul>
+
+            <div class="actions">
+              <a class="btn-primary" href="https://admin.worldposta.com/auth/register" target="_blank" rel="noopener noreferrer">
+                {{ tabContent().cta ?? 'Get started' }}
+                <fa-icon [icon]="icons.arrowRight" aria-hidden="true" />
+              <span class="sr-only">(opens in a new tab)</span></a>
+              <a class="btn-secondary" href="/cloudspace">Learn more</a>
+            </div>
+            }
+          </div>
+
+          @if (panelStats(); as stats) {
+            <ul class="vm-stats" aria-label="Current usage">
+              @for (stat of stats; track stat.label) {
+                <li class="vm-stat" [attr.data-tone]="stat.tone">
+                  <span class="vm-stat__icon"><fa-icon [icon]="stat.icon" aria-hidden="true" /></span>
+                  <p class="vm-stat__label">{{ stat.label }}</p>
+                  <p class="vm-stat__value">
+                    {{ stat.value }}
+                    @if (stat.delta) {
+                      <span class="vm-stat__delta">
+                        <fa-icon
+                          [icon]="
+                            stat.deltaDirection === 'down'
+                              ? icons.arrowDown
+                              : stat.deltaDirection === 'flat'
+                                ? icons.minus
+                                : icons.arrowUp
+                          "
+                          aria-hidden="true"
+                        />
+                        <!-- The arrow is the only thing carrying direction visually,
+                             so the word is spoken for anyone not seeing it. -->
+                        <span class="vm-stat__delta-dir">{{
+                          stat.deltaDirection === 'down'
+                            ? 'down'
+                            : stat.deltaDirection === 'flat'
+                              ? 'no change'
+                              : 'up'
+                        }}</span>{{ stat.delta }}
+                      </span>
+                    }
+                  </p>
+                  <!-- Restates the value above, so it carries no information of its own. -->
+                  <svg
+                    class="vm-stat__spark"
+                    [attr.viewBox]="'0 0 ' + sparkWidth + ' ' + sparkHeight"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <polygon class="vm-stat__area" [attr.points]="sparkArea(stat.trend)" />
+                    <polyline
+                      class="vm-stat__line"
+                      [attr.points]="sparkLine(stat.trend)"
+                      vector-effect="non-scaling-stroke"
+                    />
+                  </svg>
+                </li>
+              }
+            </ul>
+          } @else if (panelImage(); as image) {
+            <div class="panel-visual">
+              <div class="mockup-shell">
+                <img
+                  [ngSrc]="image"
+                  width="800"
+                  height="450"
+                  [alt]="tabContent().imageAlt ?? ''"
+                />
+              </div>
+            </div>
+          }
+        </div>
+
+        @if (tabContent().notes; as notes) {
+          <app-notes-panel [view]="notes" />
+        }
+
+        @if (tabContent().cards; as cards) {
+          <app-panel-cards [cards]="cards" />
+        }
+
+        @if (tabContent().calendar; as cal) {
+          <div class="cal-card">
+            <div class="cal-card__head">
+              <!-- Presentational: this preview steps through nothing, so the
+                   month controls are not real buttons. -->
+              <span class="cal-nav" aria-hidden="true">
+                <span class="cal-nav__step"><fa-icon [icon]="icons.chevronLeft" /></span>
+                <span class="cal-nav__step"><fa-icon [icon]="icons.chevronRight" /></span>
+              </span>
+              <h4 class="cal-card__month">{{ cal.month }}</h4>
+              <span class="cal-views" aria-hidden="true">
+                @for (view of cal.views; track view) {
+                  <span class="cal-views__item" [class.cal-views__item--current]="view === cal.activeView">{{ view }}</span>
+                }
+              </span>
+              <span class="vm-search" aria-hidden="true">
+                <fa-icon [icon]="icons.search" />
+                <span class="vm-search__placeholder">{{ cal.searchPlaceholder }}</span>
+              </span>
+              <a class="vm-create" href="#create">
+                <fa-icon [icon]="icons.plus" aria-hidden="true" />
+                {{ cal.createLabel }}
+              </a>
+            </div>
+
+            <div class="cal-body">
+              @if (calendarWeeks(); as weeks) {
+                <table class="cal-grid">
+                  <caption class="sr-only">
+                    Example calendar for {{ cal.month }}: illustrative sample data.
+                  </caption>
+                  <thead>
+                    <tr>
+                      @for (day of cal.weekdays; track day) {
+                        <th scope="col">{{ day }}</th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (week of weeks; track $index) {
+                      <tr>
+                        @for (cell of week; track $index) {
+                          <td
+                            class="cal-day"
+                            [class.cal-day--outside]="cell.outside"
+                            [class.cal-day--today]="cell.today"
+                          >
+                            <span class="cal-day__number">{{ cell.day }}</span>
+                            @if (cell.event; as event) {
+                              <span class="cal-event" [attr.data-tone]="event.tone">
+                                <span class="cal-event__dot" aria-hidden="true"></span>
+                                <span class="cal-event__label">{{ event.label }}</span>
+                                <span class="cal-event__time">{{ event.time }}</span>
+                              </span>
+                            }
+                          </td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              }
+
+              <section class="cal-agenda" aria-label="Upcoming events">
+                @for (day of cal.agenda; track day.title) {
+                  <div class="cal-agenda__group">
+                    <p class="cal-agenda__head">
+                      <strong>{{ day.title }}</strong>
+                      <span>{{ day.date }}</span>
+                    </p>
+                    <ul class="cal-agenda__list">
+                      @for (entry of day.entries; track entry.label) {
+                        <li class="cal-agenda__item" [attr.data-tone]="entry.tone">
+                          <span class="cal-event__dot" aria-hidden="true"></span>
+                          <span class="cal-agenda__text">
+                            <strong>{{ entry.label }}</strong>
+                            <span>{{ entry.time }}</span>
+                          </span>
+                          @if (entry.join) {
+                            <a class="cal-agenda__join" href="#join">Join</a>
+                          } @else {
+                            <span class="vm-actions" aria-hidden="true"><fa-icon [icon]="icons.ellipsis" /></span>
+                          }
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                }
+                <a class="cal-agenda__all" href="#events">
+                  {{ cal.viewAllLabel }}
+                  <fa-icon [icon]="icons.arrowRight" aria-hidden="true" />
+                </a>
+              </section>
+            </div>
+          </div>
+        } @else if (tabContent().console; as view) {
+          <div class="vm-table-card">
+            <div class="vm-table-card__head">
+              <h4 class="vm-table-card__title">
+                {{ view.title }}
+                @if (!view.subtitle) {
+                  <span>({{ view.total }})</span>
+                }
+              </h4>
+              <!-- Presentational: this preview has nothing to search or select, so the
+                   field is not a real control and is hidden from assistive tech. -->
+              <span class="vm-search" aria-hidden="true">
+                <fa-icon [icon]="icons.search" />
+                <span class="vm-search__placeholder">{{ view.searchPlaceholder }}</span>
+              </span>
+              @if (view.createLabel) {
+                <a class="vm-create" href="#create">
+                  <fa-icon [icon]="icons.plus" aria-hidden="true" />
+                  {{ view.createLabel }}
+                </a>
+              }
+            </div>
+
+            <app-console-extras [subtitle]="view.subtitle" [toolbar]="view.toolbar ?? []" [capacity]="view.capacity" [views]="view.views ?? []" />
+
+            @if (view.cards; as cards) {
+              <app-console-cards [cards]="cards" [label]="view.title" />
+            } @else if (consoleTable(); as table) {
+              <!-- Focusable so keyboard users can scroll the table sideways on narrow screens. -->
+              <div class="vm-table-scroll" role="region" tabindex="0" [attr.aria-label]="view.title + ' table'">
+                <table class="vm-table">
+                  <caption class="sr-only">
+                    Example {{ view.title.toLowerCase() }}, showing {{ view.rows.length }} of {{ view.total | number }}: illustrative sample data.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col" class="vm-col-select" aria-hidden="true"><span class="vm-check"></span></th>
+                      <th scope="col">{{ table.nameLabel }}</th>
+                      <!-- Status sits where the view declares it, not always first. -->
+                      @for (column of table.columnsBefore; track column) {
+                        <th scope="col">{{ column }}</th>
+                      }
+                      @if (table.showStatus) {
+                        <th scope="col">Status</th>
+                      }
+                      @for (column of table.columnsAfter; track column) {
+                        <th scope="col">{{ column }}</th>
+                      }
+                      <th scope="col" aria-hidden="true">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of table.rows; track row.name) {
+                      <tr>
+                        <td class="vm-col-select" aria-hidden="true"><span class="vm-check"></span></td>
+                        <th scope="row" class="vm-name">
+                          @if (row.initials) {
+                            <span class="vm-name__icon vm-name__icon--initials" aria-hidden="true">{{ row.initials }}</span>
+                          } @else {
+                            <span class="vm-name__icon"><fa-icon [icon]="row.icon" aria-hidden="true" /></span>
+                          }
+                          {{ row.name }}
+                        </th>
+                        @for (cell of row.before; track $index) {
+                          <td>{{ cell }}</td>
+                        }
+                        @if (table.showStatus && row.status; as status) {
+                          <td>
+                            <!-- Dot plus word: state is never carried by colour alone. -->
+                            <span class="vm-status" [attr.data-tone]="status.tone">
+                              <span class="vm-status__dot" aria-hidden="true"></span>
+                              {{ status.label }}
+                            </span>
+                          </td>
+                        }
+                        @for (cell of row.after; track $index; let last = $last) {
+                          <td [class.vm-created]="last">{{ cell }}</td>
+                        }
+                        <td aria-hidden="true"><span class="vm-actions"><fa-icon [icon]="icons.ellipsis" /></span></td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            @if (!view.cards) {
+            <div class="vm-table-card__foot">
+              <p class="vm-count">
+                Showing 1 - {{ view.rows.length }} of {{ view.total | number }} {{ view.unitLabel ?? 'results' }}
+              </p>
+              <span class="vm-pager" aria-hidden="true">
+                <span class="vm-pager__step">‹</span>
+                @for (page of pageNumbers(); track page) {
+                  <span class="vm-pager__page" [class.vm-pager__page--current]="page === 1">{{ page }}</span>
+                }
+                <span class="vm-pager__step">›</span>
+              </span>
+            </div>
+            }
+          </div>
+        }
+
+        }
+
+        @if (!placeholder()) {
+        <div class="benefits-strip">
+          @for (benefit of tabContent().benefits; track $index) {
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <fa-icon [icon]="benefit.icon" aria-hidden="true" />
+              </div>
+              <div class="benefit-text">
+                <h4>{{ benefit.title }}</h4>
+                <p>{{ benefit.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+        }
+      </div>
+    </div>
+    <ng-content select="[ecosystemFooter]" />
+  </div>
+</section>

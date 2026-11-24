@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <title>WorldPosta</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <!--
+    Icons are the WorldPosta WP mark. Order matters: browsers that understand
+    an SVG favicon take the first line (it re-inks itself on dark browser
+    chrome); everything else falls back to the .ico, which carries 16/32/48.
+  -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!--
+    Design system typography: Poppins (headings) + Open Sans (body).
+    Loaded here rather than via @import in design-system.css so the two
+    preconnects can overlap the request instead of serialising behind the
+    stylesheet. Families/weights must match design-tokens.json.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+
+  <!--
+    Resolve the theme before first paint so there is no light/dark flash.
+    Must stay in sync with ThemeService (src/app/shared/services/theme.service.ts):
+    same storage key, same precedence (stored choice > OS preference > dark).
+  -->
+  <script>
+    (function () {
+      var mode = 'dark';
+      try {
+        var stored = localStorage.getItem('worldposta-theme');
+        if (stored === 'dark' || stored === 'light') {
+          mode = stored;
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          mode = 'light';
+        }
+      } catch (e) {
+        // Storage blocked — fall back to the dark-first default in the markup.
+      }
+      document.documentElement.setAttribute('data-theme', mode);
+    })();
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

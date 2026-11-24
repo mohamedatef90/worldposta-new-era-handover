@@ -1,0 +1,61 @@
+<form class="bc-layout" (submit)="save($event)" novalidate aria-labelledby="bc-title">
+  <div class="bc-main">
+    <div class="d-head">
+      <div>
+        <h3 id="bc-title">Deploy New Infrastructure</h3>
+        <p>Pick a blueprint, a region and how many nodes. Billing starts as a 1-month subscription.</p>
+      </div>
+      <span class="bc-live"><span aria-hidden="true"></span>Live Estimator Active</span>
+    </div>
+
+    <fieldset>
+      <legend class="d-label bc-caps">Hardware Blueprint</legend>
+      <div class="bc-cards">
+        @for (t of templates; track t.id) {
+          <label class="bc-card">
+            <input class="sr-only" type="radio" name="bc-template" [checked]="config().templateId === t.id" (change)="set('templateId', t.id)" />
+            <span class="bc-card__top"><fa-icon class="bc-card__icon" [icon]="i.chip" aria-hidden="true" /><span class="bc-price">${{ t.priceMonthly }}<small> / month</small></span></span>
+            <strong>{{ t.name }}</strong>
+            <small>{{ t.cpu }} vCPU, {{ t.ramGB }} GB RAM, {{ t.bootDiskGB }} GB disk. {{ t.description }}</small>
+          </label>
+        }
+      </div>
+    </fieldset>
+
+    <div class="d-grid">
+      <label class="d-field">
+        <span>Region</span>
+        <select class="d-select" [value]="config().region" (change)="set('region', $any($event.target).value)">
+          @for (r of regions; track r.id) { <option [value]="r.id">{{ r.name }}</option> }
+        </select>
+      </label>
+      <label class="d-field">
+        <span>Number of Nodes</span>
+        <input class="d-input" type="number" min="1" max="20" [value]="quantityRaw()" (input)="setQuantity($any($event.target).value)" [attr.aria-invalid]="submitted() && !!quantityError()" aria-describedby="bc-hint-qty" />
+        @if (submitted() && quantityError(); as e) { <p class="d-error">{{ e }}</p> }
+        <span class="d-hint" id="bc-hint-qty">Nodes are named for you, for example {{ config().templateId }}-fra-01.</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Deployment Summary: recalculates on every change. -->
+  <section class="bc-summary" aria-labelledby="bc-summary-title">
+    <h4 id="bc-summary-title"><fa-icon [icon]="i.receipt" aria-hidden="true" />Deployment Summary</h4>
+    <dl class="bc-rows">
+      <div><dt>Blueprint</dt><dd>{{ blueprintName() }}</dd></div>
+      <div><dt>Deployment Target</dt><dd>{{ regionName() }}</dd></div>
+      <div><dt>Billing Model<small>Billed upfront recurringly</small></dt><dd>Subscription</dd></div>
+      <div><dt>Commitment Term</dt><dd>1 month</dd></div>
+      <div><dt>Static Public IPs</dt><dd>{{ publicIps }}</dd></div>
+    </dl>
+    <div class="bc-total" aria-live="polite">
+      <span class="bc-caps">Unit Base Total</span>
+      <span class="bc-total__value">${{ subtotal() | number: '1.2-2' }}<small>/ month</small></span>
+    </div>
+    @if (quantity() > 1) {
+      <p class="bc-deploy"><span>Total Deployment (x{{ quantity() }})</span><strong>${{ grandTotal() | number: '1.2-2' }}</strong></p>
+    }
+    <button type="submit" class="d-btn d-btn--primary bc-submit">Validate &amp; Deploy</button>
+    <p class="bc-fine">By deploying, you agree to WorldPosta's SLA and the selected billing model. Resource allocation begins immediately.</p>
+  </section>
+</form>

@@ -1,0 +1,64 @@
+<a class="skip-to-content" href="#main-content" (click)="skipToContent($event)">Skip to content</a>
+<div class="site-header-bar" [class.site-header-bar--scrolled]="scrolled() || solid()">
+  <header class="site-header ds-container">
+    <a class="brand" routerLink="/" aria-label="WorldPosta home">
+      <img
+        ngSrc="/worldposta-assets/WP-Logo.avif"
+        width="600"
+        height="154"
+        priority
+        alt="WorldPosta"
+      />
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <app-main-nav-links />
+    </nav>
+
+    <div class="header-end">
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" [class.active]="!theme.isDark()" [attr.aria-pressed]="!theme.isDark()" aria-label="Light theme" (click)="theme.set('light')"><fa-icon [icon]="icons.sun" /></button>
+        <button type="button" [class.active]="theme.isDark()" [attr.aria-pressed]="theme.isDark()" aria-label="Dark theme" (click)="theme.set('dark')"><fa-icon [icon]="icons.moon" /></button>
+      </div>
+
+      <div class="header-actions">
+        <a class="sign-in" href="https://admin.worldposta.com/auth/login?redirect=https:%2F%2Fwww.worldposta.com" target="_blank" rel="noopener noreferrer">Login<span class="sr-only">(opens in a new tab)</span></a>
+        <a class="header-cta" href="https://admin.worldposta.com/auth/register" target="_blank" rel="noopener noreferrer">Start free <fa-icon [icon]="icons.arrowRight" aria-hidden="true" /><span class="sr-only">(opens in a new tab)</span></a>
+      </div>
+      <button
+      #menuButton
+      class="menu-button"
+      type="button"
+      [attr.aria-label]="menuOpen() ? 'Close navigation menu' : 'Open navigation menu'"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mobile-nav"
+      (click)="toggleMenu()"
+    >
+      <fa-icon [icon]="menuOpen() ? icons.xmark : icons.bars" aria-hidden="true" />
+    </button>
+    </div>
+
+    @if (menuOpen()) {
+      <div class="mobile-nav__backdrop" (click)="closeMenu()" aria-hidden="true"></div>
+
+      <nav #menuPanel class="mobile-nav" id="mobile-nav" aria-label="Primary navigation">
+        <app-main-nav-links [mobile]="true" (linkClick)="closeMenu()" />
+
+        <hr class="mobile-nav__rule" />
+
+        <!-- Deliberately does not close the drawer: the drawer re-themes
+             around you, which is the clearest confirmation the tap worked. -->
+        <button class="mobile-nav__toggle" type="button" (click)="theme.toggle()">
+          <fa-icon [icon]="theme.isDark() ? icons.sun : icons.moon" aria-hidden="true" />
+          {{ theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme' }}
+        </button>
+
+        <a href="https://admin.worldposta.com/auth/login?redirect=https:%2F%2Fwww.worldposta.com" target="_blank" rel="noopener noreferrer" (click)="closeMenu()">Login<span class="sr-only">(opens in a new tab)</span></a>
+        <a class="mobile-nav__cta" href="https://admin.worldposta.com/auth/register" target="_blank" rel="noopener noreferrer" (click)="closeMenu()">
+          Start free <fa-icon [icon]="icons.arrowRight" aria-hidden="true" />
+        <span class="sr-only">(opens in a new tab)</span></a>
+      </nav>
+    }
+  </header>
+</div>
+

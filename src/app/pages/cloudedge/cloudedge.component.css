@@ -1,0 +1,965 @@
+:host { display:block; }
+*, *::before, *::after { box-sizing:border-box; }
+h1, h2, h3 { font-family:var(--font-heading); margin:0; color:var(--wp-ink); }
+p { margin:0; }
+img { max-width:100%; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+.site-nav a { display:inline-flex; align-items:center; gap:var(--space-sm); font-size:var(--fs-caption); font-weight:var(--fw-semibold); white-space:nowrap; }
+.site-nav fa-icon { font-size:9px; }
+@media (max-width:1199px) { .site-nav a { font-size:var(--fs-caption); } }
+.mobile-nav a { display:flex; min-height:48px; align-items:center; gap:var(--space-sm); padding:0 12px; border-radius:var(--radius-md); color:var(--wp-ink); font-size:var(--fs-body); font-weight:var(--fw-semibold); text-decoration:none; }
+.mobile-nav a:hover { background:color-mix(in srgb, var(--color-brand-green) 12%, transparent); }
+
+.page { overflow-x:clip; background:var(--color-bg-primary); }
+
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:var(--space-sm); min-height:48px; padding:0 28px; border:1.5px solid transparent; border-radius: var(--radius-md); font-family:var(--font-body); font-size:var(--fs-body-sm); font-weight:var(--fw-semibold); text-decoration:none; white-space:nowrap; cursor:pointer; transition:transform var(--duration-base) var(--ease-out), background var(--duration-fast) var(--ease-in-out), color var(--duration-fast) var(--ease-in-out), box-shadow var(--duration-base) var(--ease-out); }
+.btn--primary { color:var(--primary-foreground); background:var(--color-action); box-shadow:0 8px 20px color-mix(in srgb, var(--color-brand-green) 25%, transparent); }
+.btn--primary:hover { color:var(--primary-foreground); background:var(--color-action-hover); transform:translateY(-2px); }
+.btn--ghost { color:var(--wp-ink); background:var(--wp-panel); border-color:var(--wp-panel-line); box-shadow:var(--shadow-sm); }
+.btn--ghost:hover { color:var(--wp-ink); border-color:var(--color-brand-green); transform:translateY(-2px); }
+/* Brand green as small text: mixed toward the theme ink so it keeps the brand
+   hue but clears 4.5:1 on white, dark panels and pale green chips. */
+:host { --ce-green-text:color-mix(in srgb, var(--color-brand-green) 60%, var(--wp-ink)); }
+.btn--outline { color:var(--ce-green-text); border-color:var(--color-brand-green); background:transparent; }
+.btn--outline:hover { color:var(--primary-foreground); background:var(--color-action); }
+.btn--block { width:100%; }
+.btn--xs { min-height:32px; padding:0 14px; font-size:var(--fs-caption); }
+
+.block { display:block; }
+.text-rose { color:var(--wp-tone-rose); }
+
+/* ============================================================
+   HERO — identical in content and structure to the homepage
+   CloudEdge hero; this page just gives it its own URL.
+   ============================================================ */
+.hero { position:relative; overflow:hidden; padding-top:80px; min-height:640px; isolation:isolate; background:linear-gradient(125deg, var(--wp-hero-from) 8%, var(--wp-hero-via) 61%, var(--wp-hero-to)); }
+.hero::after { position:absolute; z-index:-1; inset:38% 0 auto; height:62%; background:linear-gradient(180deg, transparent, var(--wp-hero-veil)); content:''; }
+.hero__cloud { position:absolute; z-index:-1; border-radius:var(--radius-full); filter:blur(2px); opacity:.72; background:radial-gradient(circle at 60% 30%, var(--wp-cloud-core), var(--wp-cloud-edge) 42%, transparent 70%); }
+/* Both blobs sit over the copy column and bleed into the photo's own
+   left-edge fade (see .hero-photo below) — the full-bleed photo is opaque
+   everywhere else, so a blob positioned behind it would simply be hidden. */
+.hero__cloud--one { width:460px; height:320px; top:-90px; left:40px; opacity:.8; }
+/* Green accent blob — this page's one deliberate departure from the shared
+   all-blue cloud-blob treatment, per the "soft blue/green curved shapes"
+   brief. Scoped to this page only; Home/Posta keep the plain blue pair. */
+.hero__cloud--two { width:420px; height:300px; left:160px; bottom:-110px; opacity:.7; background:radial-gradient(circle at 60% 30%, color-mix(in srgb, var(--color-brand-green) 38%, transparent), color-mix(in srgb, var(--color-brand-green) 14%, transparent) 42%, transparent 70%); }
+
+.hero__content { padding-top:var(--space-xl); padding-bottom:var(--wp-section-pad); }
+.hero-copy { position:relative; z-index:1; max-width:495px; padding-top:var(--space-md); }
+.eyebrow { display:flex; align-items:center; gap:var(--space-sm); margin:0 0 12px; color:var(--color-text-muted); font-size:var(--fs-caption); font-weight:var(--fw-bold); letter-spacing:3px; line-height:1.4; text-transform:uppercase; }
+.eyebrow__rule { width:28px; height:1.5px; background:var(--color-text-muted); }
+h1 { font-size:clamp(44px, 4.2vw, 66px); line-height:.98; letter-spacing:-2.4px; font-weight:var(--fw-bold); }
+h1 span { display:block; }
+/* The blue accent word nests inside its line's own block-level span (so it
+   stays on that line, not its own), so it needs pulling back to inline. */
+h1 > span .text-blue { display:inline; }
+.text-blue { color:var(--wp-blue); }
+.text-green { color:var(--wp-green); font-size:.84em; white-space:nowrap; }
+@media (max-width:639px) { .text-green { white-space:normal; } }
+.hero-copy__description { max-width:465px; margin:var(--space-md) 0 20px; color:var(--color-text-secondary); font-size:17px; font-weight:var(--fw-medium); line-height:1.35; }
+
+.hero-copy__actions { display:flex; flex-wrap:wrap; gap:var(--space-md); margin-bottom:var(--space-lg); }
+.hero-copy__actions .btn { min-height:48px; padding:0 28px; font-size:var(--fs-body-sm); }
+
+/* Tone icons — large, clearly-colored pastel rounded-square badges. Deliberately
+   big and solid (not small outline glyphs): the same treatment is used for the
+   feature list under the CTAs and the floating cards over the photo, so the
+   two read as the same feature shown twice, not two different icon systems. */
+.tone-icon { display:inline-grid; flex:0 0 auto; width:44px; height:44px; place-items:center; border-radius:13px; font-size:19px; --tone:var(--wp-tone-sky); color:var(--tone); background:color-mix(in srgb, var(--tone) 18%, transparent); }
+.tone-icon[data-tone='green'] { --tone:var(--wp-tone-green); }
+.tone-icon[data-tone='blue'] { --tone:var(--wp-tone-blue); }
+.tone-icon[data-tone='purple'] { --tone:var(--wp-tone-purple); }
+.tone-icon[data-tone='rose'] { --tone:var(--wp-tone-rose); }
+.tone-icon[data-tone='amber'] { --tone:var(--wp-tone-amber); }
+.tone-icon[data-tone='sky'] { --tone:var(--wp-tone-sky); }
+
+/* ============================================================
+   ECOSYSTEM STRIP — "also part of the WorldPosta ecosystem", just
+   under the hero. Same pattern as the homepage's own strip, with
+   CloudEdge's managed-services lineup in place of collaboration tools.
+   ============================================================ */
+.ecosystem-strip-section { padding:10px 0; background:linear-gradient(180deg, var(--wp-band-from) 0%, var(--wp-band-to) 100%); }
+/* Column, not the homepage's side-by-side row:CloudEdge's labels ("Object
+   Storage as a Service", …) are long enough that a fixed-width intro column
+   left too little room for seven of them, forcing a horizontal scroll that
+   cut the last two off. Full-width wrapping tiles under the intro means
+   every tile is always on screen, never scrolled or clipped. */
+.ecosystem-strip { display:flex; flex-direction:column; align-items:flex-start; gap:var(--space-lg); padding:var(--space-lg) var(--space-xl); background:var(--wp-panel); border-radius:var(--radius-xl); box-shadow:var(--wp-panel-shadow); }
+.ecosystem-strip__intro { max-width:560px; }
+.ecosystem-strip__eyebrow { margin:0 0 var(--space-sm); color:var(--color-text-muted); font-size:var(--fs-caption); font-weight:var(--fw-bold); letter-spacing:1.5px; text-transform:uppercase; }
+.ecosystem-strip__heading { margin:0 0 var(--space-xs); color:var(--wp-ink); font-size:20px; font-weight:var(--fw-bold); line-height:1.2; }
+.ecosystem-strip__heading span { color:var(--color-brand-green); }
+.ecosystem-strip__subtitle { margin:0; color:var(--wp-body-strong); font-size:13px; line-height:1.4; }
+.ecosystem-strip__tiles { display:flex; flex-wrap:wrap; align-items:stretch; gap:var(--space-sm); width:100%; }
+.ecosystem-tile { display:flex; flex-direction:column; align-items:center; gap:var(--space-sm); padding:var(--space-sm) 12px; text-decoration:none; white-space:nowrap; transition:transform var(--duration-fast) var(--ease-out); }
+.ecosystem-tile:hover { transform:translateY(-2px); }
+.ecosystem-tile:focus-visible { outline:2px solid var(--color-brand-green); outline-offset:2px; border-radius:var(--radius-md); }
+.ecosystem-tile__icon { display:grid; width:40px; height:40px; place-items:center; border-radius:var(--radius-lg); font-size:var(--fs-body); color:var(--tone); background:color-mix(in srgb, var(--tone) var(--wp-tone-fill), transparent); }
+.ecosystem-tile__icon img { width:auto; height:auto; max-width:28px; max-height:16px; object-fit:contain; }
+.ecosystem-tile__label { display:inline-flex; align-items:center; gap:6px; color:var(--color-text-primary); font-size:var(--fs-caption); font-weight:var(--fw-semibold); }
+.ecosystem-tile__chevron { color:var(--color-text-muted); font-size:10px; flex-shrink:0; }
+
+/* Tile color variants */
+.tile--green { --tone:var(--wp-tone-leaf); }
+.tile--purple { --tone:var(--wp-tone-purple); }
+.tile--amber { --tone:var(--wp-tone-amber); }
+.tile--sky { --tone:var(--wp-tone-sky); }
+
+@media (max-width:1199px) { .ecosystem-strip { gap:var(--space-md); padding:20px var(--space-lg); } }
+@media (max-width:639px) {
+  .ecosystem-strip { padding:20px var(--space-md); border-radius:var(--radius-xl); }
+  .ecosystem-strip__heading { font-size:var(--fs-body-lg); }
+  .ecosystem-strip__subtitle { font-size:var(--fs-caption); }
+  .ecosystem-tile { flex:1 1 calc(50% - var(--space-sm)); padding:var(--space-sm) var(--space-sm); }
+  .ecosystem-tile__label { white-space:normal; text-align:center; }
+  .ecosystem-tile__icon { width:36px; height:36px; font-size:var(--fs-body-sm); }
+}
+
+/* ============================================================
+   TRUST BAR — the five benefit chips as their own full-width band,
+   just under the hero. One line, with extra inline padding on top
+   of the shared ds-container so the first and last items line up
+   with the ecosystem strip card's own content edges below it (that
+   card pads itself var(--space-xl)/--space-lg/--space-md in from its
+   ds-container at each breakpoint — matched here to keep both rows
+   starting and ending at the same x position). Wraps only once
+   there isn't room for all five on a line.
+   ============================================================ */
+.trust-bar-section { padding:var(--space-md) 0; background:var(--wp-panel); border-bottom:1px solid var(--wp-panel-line); }
+.trust-bar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--space-sm) var(--space-lg); margin:0; padding-inline:var(--space-xl); list-style:none; }
+.trust-bar li { display:flex; align-items:center; gap:var(--space-sm); color:var(--wp-ink); font-size:13.5px; font-weight:var(--fw-semibold); white-space:nowrap; }
+.tone-icon--sm { width:32px; height:32px; border-radius:var(--radius-md); font-size:var(--fs-body-sm); }
+
+@media (max-width:1199px) { .trust-bar { padding-inline:var(--space-lg); } }
+@media (max-width:639px) { .trust-bar { justify-content:flex-start; gap:var(--space-sm) var(--space-md); padding-inline:var(--space-md); } }
+
+/* hero-photo — fades into the hero's own gradient on its left edge, so it
+   reads as part of the section's background rather than a framed screenshot
+   on top of it. Sized to the photo's own aspect ratio (aspect-ratio, not a
+   stretched inset box). On wide screens three benefit cards float around the
+   glass cloud (see .hero-float below). */
+.hero-photo { position:absolute; z-index:0; overflow:hidden; border-radius:28px; left:44%; right:28px; top:50%; aspect-ratio:1.5; transform:translateY(-50%); mask-image:linear-gradient(to right, transparent, black 1.5%); -webkit-mask-image:linear-gradient(to right, transparent, black 1.5%); }
+.hero-photo__img, .hero-photo__links { position:absolute; inset:0; }
+/* Parallax (see .parallax-drift in styles.css and ScrollFxService): the photo and its lines lag as
+   the hero scrolls away, the cards don't, and the blobs lead. The image moves
+   inside its still, masked wrapper so the fades stay put. Only on desktop,
+   where the photo is a background; below 1024px it is a framed photo. */
+.hero-photo__img img, .hero-photo__links { --parallax:150px; }
+.hero__cloud { --parallax:-120px; }
+@media (max-width:1023px) { .hero-photo__img img, .hero-photo__links { --parallax:0px; } }
+.hero-photo__img img { display:block; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+.floating-card { position:absolute; z-index:1; display:flex; flex-direction:row; align-items:center; gap:12px; max-width:220px; padding:12px var(--space-md); border:1px solid color-mix(in srgb, var(--wp-panel-line) 70%, transparent); border-radius:15px; background:var(--wp-panel); box-shadow:0 10px 24px -8px color-mix(in srgb, var(--wp-ink) 16%, transparent), 0 2px 6px -2px color-mix(in srgb, var(--wp-ink) 10%, transparent); }
+.floating-card strong { font-size:13px; line-height:1.3; color:var(--color-text-primary); font-weight:var(--fw-semibold); }
+
+/* Hero benefit cards and their links, placed in % of the photo around the
+   cloud (centre ≈ 33% 37%) and clear of the person on the right. */
+.hero-links, .hero-float { display:none; }
+@media (min-width:1200px) {
+  .hero-links { display:block; position:absolute; inset:0; z-index:1; width:100%; height:100%; overflow:visible; }
+  .hero-links path { fill:none; stroke:color-mix(in srgb, var(--wp-tone-sky) 75%, white); stroke-width:1.6; stroke-linecap:round; vector-effect:non-scaling-stroke; filter:drop-shadow(0 0 3px color-mix(in srgb, var(--wp-tone-sky) 70%, transparent)); opacity:.85; }
+  .hero-float { display:flex; max-width:none; padding:10px 16px 10px 10px; z-index:2; }
+  .hero-float strong { font-size:var(--fs-body-sm); white-space:nowrap; }
+  /* Top cards clear the sticky header, which overlaps the hero's top 62px. */
+  .hero-float--no-fees { left:4%; top:13%; }
+  .hero-float--support { right:4%; top:13%; }
+  .hero-float--security { left:11%; bottom:9%; } /* clear of the CTA row at 1200–1300px */
+}
+@media (min-width:1200px) and (prefers-reduced-motion:no-preference) {
+  /* Fade, not a dash draw: non-scaling strokes ignore pathLength, so a dash animation breaks. */
+  .hero-links { opacity:0; animation:hero-links-in .8s ease-out .5s forwards; }
+  .hero-float { opacity:0; animation:hero-float-in .6s cubic-bezier(.2,.7,.2,1) forwards; }
+  .hero-float--no-fees { animation-delay:.9s; }
+  .hero-float--support { animation-delay:1.05s; }
+  .hero-float--security { animation-delay:1.2s; }
+}
+@keyframes hero-links-in { to { opacity:1; } }
+@keyframes hero-float-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+
+@media (max-width:1199px) { .hero-photo { left:50%; } }
+@media (max-width:1023px) {
+  /* Below desktop the photo drops into the flow under the copy (order puts it
+     after the headline it precedes in the DOM), full width, unfaded and uncropped. */
+  .hero { display:flex; flex-direction:column; padding-top:72px; min-height:unset; }
+  .hero-copy { max-width:620px; }
+  .hero__content { order:1; padding-bottom:var(--space-xl); }
+  .hero-photo {
+    position:relative; order:2; inset:auto; transform:none;
+    margin:0 var(--space-xl) var(--space-md); /* the jump-nav band below already adds the gap */
+    border-radius:20px;
+    -webkit-mask-image:none; mask-image:none;
+  }
+}
+@media (max-width:639px) {
+  /* Phones crop to 5:4 from the right: the person sits at the right edge and
+     the glass cloud starts ~25% in, so both stay in frame. */
+  .hero-photo { aspect-ratio:1.25; margin-inline:20px; border-radius:16px; }
+  .hero-photo__img img { object-position:100% 55%; }
+  .hero__content { padding-left:20px; padding-right:20px; padding-top:var(--space-lg); }
+  .hero-copy { padding-top:0; }
+  .hero-copy__description { font-size:var(--fs-body); }
+  .hero-chips { gap:var(--space-sm) var(--space-md); }
+  .hero-copy__actions { display:grid; grid-template-columns:1fr; }
+  .hero-copy__actions .btn { width:100%; }
+}
+
+/* ============================================================
+   SHARED SECTION PRIMITIVES — reused across every section below
+   the ecosystem strip:the alternating section background, the
+   eyebrow/heading/subtitle block, and the two-column split layout.
+   ============================================================ */
+.alt-section { padding-block:var(--wp-section-pad); background:var(--color-bg-primary); }
+.alt-section--tint { background:var(--wp-band-from); }
+/* Light theme: the blue band (#e8f4fc) drops the muted grey to 4.25:1 and the
+   brand green to 2.99:1, so deepen both inside tinted sections (5.26:1 and 4.36:1). */
+:host-context([data-theme='light']) .alt-section--tint { --color-text-muted:#5b6577; --wp-green:var(--color-action); }
+
+.section-heading { font-size:clamp(26px, 2.8vw, 38px); line-height:1.18; letter-spacing:-.5px; font-weight:var(--fw-bold); margin-bottom:var(--space-md); }
+.section-subtitle { max-width:54ch; color:var(--color-text-secondary); font-size:15.5px; line-height:1.5; margin-bottom:var(--space-lg); }
+
+.split-section { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:var(--space-2xl); align-items:center; }
+.split-section--wide { grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); }
+.split-section__copy { max-width:560px; }
+.split-section__visual { position:relative; min-height:360px; }
+
+/* Generic icon+copy grids used for the "four features" lists. */
+.feature-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:var(--space-lg); margin:0 0 var(--space-lg); padding:0; list-style:none; }
+.feature-grid li { display:flex; gap:var(--space-sm); align-items:flex-start; }
+.feature-grid strong, .feature-grid span { display:block; }
+.feature-grid strong { color:var(--wp-ink); font-size:15px; margin-bottom:2px; }
+.feature-grid span { color:var(--color-text-muted); font-size:13px; line-height:1.4; }
+
+/* A neat 2x2 grid (Zero Trust's four benefits) rather than a wrapping row —
+   precise alignment, with a smaller, more subdued icon than the page's
+   usual tone-icon size since these are supporting detail, not the focus. */
+.feature-row { display:grid; grid-template-columns:repeat(2, 1fr); gap:var(--space-lg) var(--space-xl); margin:0 0 var(--space-lg); padding:0; list-style:none; }
+.feature-row li { display:flex; flex-direction:column; gap:6px; }
+.feature-row strong { color:var(--wp-ink); font-size:var(--fs-body-sm); }
+.feature-row span { color:var(--color-text-muted); font-size:12.5px; line-height:1.4; }
+.feature-row .tone-icon { width:36px; height:36px; font-size:15px; margin-bottom:2px; }
+
+@media (max-width:639px) { .feature-row { grid-template-columns:1fr; } }
+
+.stat-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:var(--space-md); margin:0 0 var(--space-lg); padding:0; list-style:none; max-width:460px; }
+.stat-grid li { display:flex; align-items:center; gap:var(--space-sm); padding:var(--space-md); border:1px solid var(--wp-panel-line); border-radius:var(--radius-lg); background:var(--wp-panel); }
+.stat-grid strong { display:block; color:var(--wp-ink); font-size:19px; font-weight:var(--fw-bold); line-height:1.1; }
+.stat-grid span { color:var(--color-text-muted); font-size:var(--fs-caption); }
+
+/* cc-trust-row — the Cloud Computing section's three benefit cards, under
+   the ecosystem tabs and spanning the same width as their surface. */
+.cc-trust-row { display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--space-lg); margin:var(--space-2xl) 0 0; padding:0; list-style:none; }
+.cc-trust-card { display:flex; align-items:center; gap:var(--space-md); min-height:88px; padding:18px var(--space-lg); border-radius:var(--radius-xl); background:color-mix(in srgb, var(--wp-panel) 92%, var(--wp-blue) 5%); border:1px solid color-mix(in srgb, var(--wp-blue) 20%, transparent); box-shadow:0 10px 24px -18px color-mix(in srgb, var(--wp-ink) 24%, transparent); }
+.cc-trust-card .tone-icon { flex-shrink:0; width:44px; height:44px; }
+.cc-trust-card__divider { align-self:stretch; width:1px; flex-shrink:0; background:color-mix(in srgb, var(--wp-blue) 20%, transparent); }
+.cc-trust-card span:last-child { color:var(--wp-ink); font-size:14.5px; font-weight:var(--fw-bold); line-height:1.3; }
+
+@media (max-width:1023px) { .cc-trust-row { grid-template-columns:1fr; } }
+
+@media (max-width:1023px) {
+  .split-section, .split-section--wide { grid-template-columns:1fr; }
+  .split-section__copy { max-width:none; }
+  .split-section__visual { min-height:320px; }
+}
+@media (max-width:639px) {
+  .alt-section { padding-block:var(--space-xl); }
+  .feature-grid, .stat-grid { grid-template-columns:1fr; }
+}
+
+/* ============================================================
+   CHALLENGE — intro and photo beside a before/after ledger. Each row
+   pairs a pain point (rose side) with the outcome CloudEdge turns it
+   into (green side); the arrow sits on the seam between the halves.
+   ============================================================ */
+.challenge-layout { display:grid; grid-template-columns:minmax(0, 5fr) minmax(0, 7fr); gap:var(--space-2xl); align-items:stretch; }
+.challenge-intro { display:flex; flex-direction:column; }
+#challenges .section-heading { font-size:clamp(30px, 3.1vw, 46px); line-height:1.12; }
+#challenges .eyebrow__rule { background:var(--wp-tone-rose); }
+/* The Remotion loop (see ChallengeLoopComponent); its frame is 16:9. */
+.challenge-photo { aspect-ratio:16 / 9; margin-top:auto; }
+.challenge-intro .section-subtitle { margin-bottom:var(--space-lg); }
+
+.challenge-ledger {
+  --ledger-from:color-mix(in srgb, var(--wp-tone-rose) 6%, var(--wp-panel));
+  --ledger-to:color-mix(in srgb, var(--color-brand-green) 9%, var(--wp-panel));
+  display:flex; flex-direction:column; overflow:hidden;
+  border:1px solid var(--wp-panel-line); border-radius:28px;
+  background:linear-gradient(to right, var(--ledger-from) 50%, var(--ledger-to) 50%);
+  box-shadow:var(--wp-panel-shadow);
+}
+.challenge-ledger__head, .challenge-row { display:grid; grid-template-columns:minmax(0, 1fr) 44px minmax(0, 1fr); }
+.challenge-ledger__head { padding-block:var(--space-lg) var(--space-md); }
+.challenge-ledger__label { display:flex; align-items:center; gap:10px; padding-inline:28px; color:var(--wp-ink); font-size:var(--fs-caption); font-weight:var(--fw-bold); letter-spacing:1.5px; text-transform:uppercase; }
+.challenge-ledger__label::before { content:''; width:8px; height:8px; border-radius:50%; background:var(--wp-tone-rose); }
+.challenge-ledger__label--to { grid-column:3; }
+.challenge-ledger__label--to::before { background:var(--color-brand-green); }
+.challenge-ledger__rows { flex:1 1 auto; display:grid; grid-auto-rows:1fr; margin:0; padding:0; list-style:none; }
+.challenge-row { border-top:1px solid var(--wp-panel-line); }
+.challenge-row__from { display:flex; align-items:center; gap:14px; padding:22px 20px 22px 28px; }
+.challenge-row__from p { margin:0; color:var(--color-text-secondary); font-size:var(--fs-body-sm); line-height:1.45; }
+.challenge-row__from strong { display:block; color:var(--wp-ink); font-size:var(--fs-body); }
+.challenge-row__seam { display:grid; place-items:center; }
+.challenge-row__seam fa-icon { display:grid; place-items:center; width:34px; height:34px; border:1px solid var(--wp-panel-line); border-radius:50%; background:var(--wp-panel); color:var(--color-text-secondary); font-size:13px; box-shadow:var(--shadow-sm); }
+.challenge-row__to { display:flex; align-items:center; gap:12px; margin:0; padding:22px 28px 22px 20px; color:var(--wp-ink); font-size:var(--fs-body); font-weight:var(--fw-semibold); line-height:1.4; }
+.challenge-row__to fa-icon { flex:0 0 auto; color:var(--color-brand-green); font-size:20px; }
+
+@media (max-width:1100px) {
+  .challenge-layout { grid-template-columns:1fr; gap:var(--space-xl); }
+}
+/* Phones: the halves stack inside each row, the arrow turns downward and
+   each half carries its own tint. */
+@media (max-width:639px) {
+  .challenge-ledger { background:var(--wp-panel); border-radius:var(--radius-xl); }
+  .challenge-ledger__head { display:none; }
+  .challenge-row { grid-template-columns:1fr; }
+  .challenge-row:first-child { border-top:0; }
+  .challenge-row__from { padding:var(--space-md) var(--space-md) var(--space-sm); background:var(--ledger-from); }
+  .challenge-row__seam { height:0; position:relative; z-index:1; }
+  .challenge-row__seam fa-icon { transform:rotate(90deg); width:28px; height:28px; font-size:11px; }
+  .challenge-row__to { padding:var(--space-md); background:var(--ledger-to); font-size:var(--fs-body-sm); }
+}
+
+/* ============================================================
+   HUB DIAGRAM — a center icon with labeled cards floating around
+   it. Used for Expert Support.
+   ============================================================ */
+.hub { position:relative; min-height:380px; display:flex; align-items:center; justify-content:center; }
+.hub__center { display:grid; place-items:center; width:108px; height:108px; border-radius:50%; background:linear-gradient(135deg, var(--wp-blue), var(--color-brand-green)); color:var(--wp-on-brand); font-size:38px; box-shadow:var(--shadow-xl); z-index:1; }
+.hub__card { position:absolute; display:flex; align-items:center; gap:10px; max-width:200px; padding:12px 14px; border-radius:var(--radius-lg); background:var(--wp-panel); border:1px solid var(--wp-panel-line); box-shadow:var(--shadow-md); }
+.hub__card strong { display:block; color:var(--wp-ink); font-size:13px; line-height:1.25; }
+.hub__card span { color:var(--color-text-muted); font-size:11.5px; line-height:1.3; }
+.hub__card--compact { flex-direction:column; align-items:flex-start; gap:var(--space-sm); max-width:150px; }
+.hub__card--compact strong { font-size:var(--fs-caption); }
+
+/* Expert Support:three left, three right. */
+.hub--es { min-height:440px; }
+.hub__card--es-1 { left:0; top:2%; }
+.hub__card--es-2 { right:0; top:2%; }
+.hub__card--es-3 { left:2%; top:42%; }
+.hub__card--es-4 { right:2%; top:42%; }
+.hub__card--es-5 { left:0; bottom:2%; }
+.hub__card--es-6 { right:0; bottom:2%; }
+
+@media (max-width:1023px) {
+  .hub { display:flex; flex-wrap:wrap; gap:var(--space-md); min-height:auto; justify-content:center; }
+  .hub__center { display:none; }
+  .hub__card { position:static; max-width:none; width:calc(50% - var(--space-sm)); }
+}
+@media (max-width:639px) { .hub__card { width:100%; } }
+
+/* ============================================================
+
+/* ============================================================
+   PRIVATE CLOUD VISUAL — the real CloudEdge Console composited onto
+   the laptop screen in the photo (no illustrated cloud graphic), with
+   the four capability cards floating around it and thin dotted
+   threads tying each one back to the laptop in its own tone color.
+   ============================================================ */
+/* Tighter gap than the generic split-section, so the product visual sits
+   closer to the copy instead of leaving a wide dead gap between them. */
+#private-cloud .split-section { gap:var(--space-xl); }
+
+.pc-visual { min-height:460px; }
+.pc-photo { position:absolute; inset:0; border-radius:28px; overflow:hidden; box-shadow:var(--shadow-xl); mask-image:linear-gradient(to right, transparent, black 5%); -webkit-mask-image:linear-gradient(to right, transparent, black 5%); }
+.pc-photo img { display:block; width:100%; height:100%; object-fit:cover; }
+
+/* Short and understated — a product-diagram accent, not a network map. */
+.pc-lines { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.pc-line { fill:none; stroke-width:.4; stroke-linecap:round; stroke-dasharray:1.2 1.8; opacity:.5; }
+.pc-line--blue { stroke:var(--wp-tone-blue); }
+.pc-line--green { stroke:var(--wp-tone-green); }
+.pc-line--purple { stroke:var(--wp-tone-purple); }
+.pc-line--amber { stroke:var(--wp-tone-amber); }
+
+/* Compact and secondary to the product:a small icon, tight padding and a
+   narrow capped width keep each card modest, hugging its own corner just
+   clear of the laptop screen. */
+.pc-card { position:absolute; z-index:1; display:flex; align-items:center; gap:6px; width:132px; padding:7px 9px; border-radius:11px; background:var(--wp-panel); border:1px solid var(--wp-panel-line); box-shadow:var(--shadow-md); }
+.pc-card strong { display:block; color:var(--wp-ink); font-size:10.5px; line-height:1.2; }
+.pc-card span { color:var(--color-text-muted); font-size:9px; line-height:1.2; }
+.pc-card .tone-icon { width:28px; height:28px; font-size:var(--fs-caption); border-radius:var(--radius-md); flex-shrink:0; }
+.pc-card--pc-1 { left:0; top:0; }
+.pc-card--pc-2 { right:0; top:0; }
+.pc-card--pc-3 { left:0; bottom:0; }
+.pc-card--pc-4 { right:0; bottom:0; }
+
+@media (max-width:1023px) {
+  .pc-visual { display:flex; flex-wrap:wrap; gap:var(--space-md); min-height:auto; }
+  .pc-photo, .pc-lines { display:none; }
+  .pc-card { position:static; max-width:none; width:calc(50% - var(--space-sm)); }
+}
+@media (max-width:639px) { .pc-card { width:100%; } }
+
+/* ============================================================
+   ZERO TRUST ARCHITECTURE — a single security-boundary container
+   split into two tinted zones either side of a central Zero Trust
+   node, with thin lines in each zone's own color carrying the
+   "authorized → control → blocked" story at a glance.
+   ============================================================ */
+.zt-boundary { position:relative; display:grid; grid-template-columns:1fr 1fr; isolation:isolate; min-height:364px; border-radius:var(--radius-xl); overflow:hidden; border:1px solid var(--wp-panel-line); box-shadow:var(--shadow-sm); }
+.zt-zone { position:relative; z-index:1; display:flex; flex-direction:column; justify-content:center; gap:12px; padding:var(--space-xl) 28px; }
+.zt-zone--allow { background:color-mix(in srgb, var(--color-brand-green) 4%, var(--wp-panel)); }
+.zt-zone--deny { background:color-mix(in srgb, var(--wp-tone-rose) 4%, var(--wp-panel)); align-items:flex-end; }
+.zt-zone--deny .zt-server { flex-direction:row-reverse; }
+.zt-zone__label { display:flex; align-items:center; gap:var(--space-sm); margin:0 0 var(--space-xs); font-size:11px; font-weight:var(--fw-bold); letter-spacing:1px; text-transform:uppercase; }
+.zt-zone--allow .zt-zone__label { color:var(--color-brand-green); }
+.zt-zone--deny .zt-zone__label { color:var(--wp-tone-rose); }
+.zt-zone__label fa-icon { font-size:var(--fs-caption); }
+
+.zt-server { display:flex; align-items:center; gap:10px; width:100%; max-width:230px; padding:12px 14px; border-radius:13px; background:var(--wp-panel); border:1px solid var(--wp-panel-line); box-shadow:var(--shadow-sm); font-size:13px; font-weight:var(--fw-semibold); color:var(--wp-ink); }
+.zt-server__mark { margin-left:auto; font-size:var(--fs-body-sm); }
+.zt-zone--deny .zt-server__mark { margin-left:0; margin-right:auto; }
+.zt-server--allow .zt-server__mark { color:var(--color-brand-green); }
+.zt-server--deny .zt-server__mark { color:var(--wp-tone-rose); }
+
+.zt-lines { position:absolute; inset:0; z-index:1; width:100%; height:100%; overflow:visible; }
+.zt-line { fill:none; stroke-width:.5; opacity:.6; }
+.zt-line--allow { stroke:var(--color-brand-green); }
+.zt-line--deny { stroke:var(--wp-tone-rose); }
+
+.zt-center { position:absolute; z-index:2; top:50%; left:50%; transform:translate(-50%, -50%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; width:106px; height:106px; border-radius:50%; background:linear-gradient(135deg, var(--wp-blue), var(--color-brand-blue)); color:var(--wp-on-brand); border:4px solid var(--wp-panel); box-shadow:var(--shadow-xl); }
+.zt-center fa-icon { font-size:25px; }
+.zt-center span { font-size:9px; font-weight:var(--fw-bold); letter-spacing:1.3px; }
+
+@media (max-width:1023px) {
+  .zt-boundary { grid-template-columns:1fr; min-height:unset; }
+  .zt-zone--deny { align-items:flex-start; }
+  .zt-zone--deny .zt-server { flex-direction:row; }
+  .zt-zone--deny .zt-server__mark { margin-left:auto; margin-right:0; }
+  .zt-lines, .zt-center { display:none; }
+}
+
+/* ============================================================
+   GLOBAL BUSINESS — the dotted world map.
+   ============================================================ */
+.world-map { position:relative; }
+.world-map img { display:block; width:100%; height:auto; }
+.world-map__card { position:absolute; right:4%; top:10%; }
+.world-map__card strong, .world-map__card span { display:block; }
+.world-map__card span { color:var(--color-text-muted); font-size:var(--fs-caption); }
+
+/* ============================================================
+   ZERO DOWNTIME MIGRATION — from/to cards either side of a cloud
+   icon, plus a completed-checklist card.
+   ============================================================ */
+.migration-flow { display:flex; flex-direction:column; gap:var(--space-lg); }
+.migration-flow__row { display:flex; align-items:center; justify-content:space-between; gap:var(--space-md); }
+.migration-flow__card { flex:1; padding:var(--space-md); border-radius:var(--radius-lg); background:var(--wp-panel); border:1px solid var(--wp-panel-line); box-shadow:var(--shadow-sm); position:relative; }
+.migration-flow__card span { display:block; font-size:11px; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:var(--space-xs); }
+.migration-flow__card strong { display:flex; align-items:center; gap:var(--space-sm); font-size:var(--fs-body-sm); color:var(--wp-ink); }
+.migration-flow__card--done { border-color:var(--color-brand-green); }
+.migration-flow__badge { position:absolute; top:-10px; right:-10px; color:var(--color-brand-green); background:var(--wp-panel); border-radius:50%; font-size:20px; }
+.migration-flow__center { display:grid; place-items:center; width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg, var(--wp-blue), var(--color-brand-green)); color:var(--wp-on-brand); font-size:22px; flex:0 0 auto; }
+.migration-checklist { display:flex; align-items:center; justify-content:space-between; gap:var(--space-lg); padding:var(--space-lg); border-radius:var(--radius-xl); background:var(--wp-panel); border:1px solid var(--wp-panel-line); box-shadow:var(--shadow-sm); }
+.migration-checklist ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+.migration-checklist li { display:flex; align-items:center; gap:var(--space-sm); font-size:13px; color:var(--wp-ink); font-weight:var(--fw-semibold); }
+.migration-checklist li fa-icon { color:var(--color-brand-green); }
+.migration-checklist__ring { display:flex; flex-direction:column; align-items:center; gap:var(--space-xs); text-align:center; flex:0 0 auto; }
+.migration-checklist__ring fa-icon { font-size:34px; color:var(--color-brand-green); }
+.migration-checklist__ring strong { font-size:13px; color:var(--wp-ink); }
+.migration-checklist__ring span { font-size:var(--fs-caption); color:var(--color-brand-green); font-weight:var(--fw-bold); }
+
+@media (max-width:639px) { .migration-checklist { flex-direction:column; } }
+
+/* ============================================================
+   SUCCESS STORIES — reused Posta customer cards, three across.
+   ============================================================ */
+.stories-head { display:flex; justify-content:space-between; align-items:flex-end; gap:var(--space-lg); margin-bottom:var(--space-xl); flex-wrap:wrap; }
+.stories-head__actions { display:flex; align-items:center; gap:var(--space-md); }
+.stories-arrows { display:flex; gap:var(--space-sm); }
+.stories-arrows button { display:grid; place-items:center; width:40px; height:40px; border-radius:50%; border:1px solid var(--wp-panel-line); background:var(--wp-panel); color:var(--wp-ink); cursor:pointer; }
+.stories-arrows button:hover { border-color:var(--color-brand-green); color:var(--color-brand-green); }
+.stories-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--space-lg); list-style:none; padding:0; margin:0; }
+.story { border-radius:var(--radius-xl); overflow:hidden; background:var(--wp-panel); border:1px solid var(--wp-panel-line); box-shadow:var(--shadow-sm); }
+.story__photo { position:relative; aspect-ratio:1.7; }
+.story__photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.story__chip { position:absolute; top:12px; left:12px; display:flex; align-items:center; gap:6px; padding:6px 12px; border-radius:999px; background:rgba(255, 255, 255, .95); font-size:var(--fs-caption); font-weight:var(--fw-bold); color:var(--wp-ink); }
+.story__logo { display:block; height:26px; width:auto; margin:var(--space-md) var(--space-md) 0; }
+.story__quote { margin:var(--space-sm) var(--space-md) 0; color:var(--wp-body-strong); font-size:13.5px; line-height:1.5; }
+.story__cite { margin:var(--space-sm) var(--space-md) var(--space-md); font-size:var(--fs-caption); font-weight:var(--fw-bold); color:var(--wp-ink); }
+
+@media (max-width:1023px) { .stories-grid { grid-template-columns:1fr 1fr; } }
+@media (max-width:639px) { .stories-grid { grid-template-columns:1fr; } }
+
+/* ============================================================
+   COMPARE CLOUD PROVIDERS (white paper).
+   ============================================================ */
+.whitepaper-cta { margin-top:var(--space-md); }
+.whitepaper-caption { margin-top:var(--space-sm); font-size:var(--fs-caption); color:var(--color-text-muted); }
+.whitepaper-visual { min-height:320px; }
+.compare-photo { position:relative; border-radius:var(--radius-xl); overflow:hidden; aspect-ratio:1.4; box-shadow:var(--shadow-xl); }
+.compare-photo img { display:block; width:100%; height:100%; object-fit:cover; object-position:60% 10%; }
+.whitepaper-cover { position:absolute; left:-20px; bottom:-24px; width:190px; padding:var(--space-md); border-radius:var(--radius-lg); background:linear-gradient(135deg, var(--wp-blue), var(--wp-green)); color:var(--wp-on-brand); box-shadow:var(--shadow-xl); }
+.whitepaper-cover__brand { display:flex; align-items:center; gap:6px; font-size:var(--fs-caption); font-weight:var(--fw-bold); margin-bottom:var(--space-sm); opacity:.9; }
+.whitepaper-cover h3 { font-size:15px; margin-bottom:6px; color:var(--wp-on-brand); }
+.whitepaper-cover p { font-size:11px; line-height:1.4; opacity:.9; }
+.compare-card { position:absolute; right:-12px; top:-16px; width:250px; padding:var(--space-md); }
+.compare-card strong { display:block; margin-bottom:10px; font-size:13px; color:var(--wp-ink); }
+.compare-card ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px; }
+.compare-card li { display:flex; align-items:center; gap:6px; font-size:10.5px; }
+.compare-card li img { width:16px; height:16px; object-fit:contain; flex:0 0 auto; }
+.compare-card li span:first-of-type { flex:0 0 auto; width:92px; color:var(--wp-ink); font-weight:var(--fw-semibold); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.compare-card__bar { flex:1; height:6px; border-radius:999px; background:var(--wp-band-from); overflow:hidden; }
+.compare-card__bar span { display:block; height:100%; border-radius:999px; }
+.compare-card__bar span[data-tone='green'] { background:var(--color-action); }
+.compare-card__bar span[data-tone='blue'] { background:var(--wp-tone-blue); }
+.compare-card__bar span[data-tone='amber'] { background:var(--wp-tone-amber); }
+.compare-card__bar span[data-tone='rose'] { background:var(--wp-tone-rose); }
+.compare-card__price { flex:0 0 auto; font-size:10px; color:var(--color-text-muted); font-weight:var(--fw-bold); }
+
+@media (max-width:1023px) {
+  .whitepaper-cover, .compare-card { position:static; width:auto; margin-top:var(--space-md); }
+}
+
+/* ============================================================
+   PRICING.
+   ============================================================ */
+.pricing-head { display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-xl); flex-wrap:wrap; margin-bottom:var(--space-xl); }
+.pricing-trust { display:flex; flex-direction:column; gap:var(--space-md); list-style:none; padding:var(--space-lg); margin:0; background:var(--wp-panel); border-radius:var(--radius-xl); box-shadow:var(--wp-panel-shadow); min-width:280px; }
+.pricing-trust li { display:flex; align-items:center; gap:10px; }
+.pricing-trust strong { display:block; font-size:13px; color:var(--wp-ink); }
+.pricing-trust span { font-size:11.5px; color:var(--color-text-muted); }
+.pricing-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--space-lg); align-items:start; }
+.pricing-plan { position:relative; padding:var(--space-lg); border-radius:var(--radius-xl); background:var(--wp-panel); border:1px solid var(--wp-panel-line); box-shadow:var(--shadow-sm); }
+.pricing-plan--featured { border-color:var(--color-brand-green); box-shadow:0 0 0 3px color-mix(in srgb, var(--color-brand-green) 12%, transparent), var(--shadow-md); }
+.pricing-plan__badge { position:absolute; top:-14px; left:var(--space-lg); display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px; background:var(--color-action); color:var(--wp-on-brand); font-size:11px; font-weight:var(--fw-bold); }
+.pricing-plan__head { display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-sm); margin-top:var(--space-sm); }
+.pricing-plan__head h3 { font-size:var(--fs-body-lg); color:var(--wp-ink); }
+.pricing-plan__head p { font-size:var(--fs-caption); color:var(--color-text-muted); margin-top:2px; }
+.pricing-plan__discount { padding:var(--space-xs) 10px; border-radius:999px; background:color-mix(in srgb, var(--color-brand-green) 14%, transparent); color:var(--ce-green-text); font-size:11px; font-weight:var(--fw-bold); white-space:nowrap; }
+.pricing-plan__price { margin-top:var(--space-md); font-size:var(--fs-h2); font-weight:var(--fw-bold); color:var(--wp-ink); }
+.pricing-plan__price span { font-size:var(--fs-body-sm); font-weight:var(--fw-semibold); color:var(--color-text-muted); }
+.pricing-plan__billing { font-size:var(--fs-caption); color:var(--color-text-muted); margin-bottom:var(--space-md); }
+.pricing-plan__features { list-style:none; padding:0; margin:var(--space-md) 0 0; display:flex; flex-direction:column; gap:9px; }
+.pricing-plan__features li { display:flex; align-items:center; gap:var(--space-sm); font-size:12.5px; color:var(--wp-body-strong); }
+.pricing-plan__features fa-icon { color:var(--color-brand-green); font-size:13px; flex:0 0 auto; }
+.addon-panel { padding:var(--space-lg); border-radius:var(--radius-xl); background:var(--wp-panel); border:1px solid var(--wp-panel-line); box-shadow:var(--shadow-sm); }
+.addon-panel h3 { display:flex; align-items:center; gap:var(--space-sm); font-size:var(--fs-body); color:var(--wp-ink); }
+.addon-panel > p { font-size:var(--fs-caption); color:var(--color-text-muted); margin:var(--space-xs) 0 var(--space-md); }
+.addon-panel ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:var(--space-sm); }
+.addon-panel li { display:flex; align-items:center; gap:10px; padding:10px 0; border-top:1px solid var(--wp-panel-line); }
+.addon-panel li:first-child { border-top:0; padding-top:0; }
+.addon-panel li div { flex:1; min-width:0; }
+.addon-panel li strong { display:block; font-size:13px; color:var(--wp-ink); }
+.addon-panel li span { font-size:11.5px; color:var(--color-text-muted); }
+
+@media (max-width:1199px) { .pricing-grid { grid-template-columns:1fr 1fr; } .addon-panel { grid-column:1 / -1; } }
+@media (max-width:639px) { .pricing-grid { grid-template-columns:1fr; } .pricing-head { flex-direction:column; } }
+
+/* ============================================================
+   FINAL CTA.
+   ============================================================ */
+.final-cta-section { padding-block:var(--wp-section-pad); background:linear-gradient(135deg, var(--wp-hero-from) 8%, var(--wp-hero-via) 61%, var(--wp-hero-to)); }
+.final-cta { display:flex; justify-content:space-between; align-items:center; gap:var(--space-xl); padding:var(--space-2xl); border-radius:var(--radius-2xl); background:var(--wp-panel); box-shadow:var(--wp-panel-shadow); flex-wrap:wrap; }
+.final-cta__actions { display:flex; gap:var(--space-md); flex-wrap:wrap; }
+.final-cta .section-heading { margin-bottom:var(--space-sm); }
+.final-cta .section-subtitle { margin-bottom:0; }
+
+/* CloudEdge visual composition:product screens, topology, and service flow. */
+.split-section__visual { min-width:0; }
+.pc-visual { min-height:510px; padding:90px 0; }
+.pc-photo { inset:65px 0; mask-image:none; -webkit-mask-image:none; }
+.pc-photo img { object-position:center; }
+.pc-card { width:195px; padding:12px; gap:10px; border-radius:var(--radius-xl); }
+.pc-card strong { font-size:var(--fs-caption); line-height:1.35; }
+.pc-card span { font-size:11px; line-height:1.4; }
+.pc-card .tone-icon { width:36px; height:36px; font-size:var(--fs-body); }
+.pc-line { opacity:.7; }
+.zt-boundary { min-height:410px; border-radius:28px; background:var(--wp-panel); }
+.zt-zone { padding:30px 18px; gap:22px; }
+.zt-zone--allow { padding-right:58px; }
+.zt-zone--deny { padding-left:58px; }
+.zt-zone__label { font-size:9px; letter-spacing:.5px; line-height:1.6; }
+.zt-server { font-size:11px; gap:var(--space-sm); min-height:58px; padding:12px 10px; }
+.zt-server span { min-width:0; }
+.zt-center { width:88px; height:110px; border-radius:var(--radius-2xl); background:var(--wp-blue); }
+.zt-lines { opacity:.55; }
+.world-map { padding:50px 0 var(--space-md); min-height:360px; display:grid; align-items:center; }
+.world-map__card { top:0; right:0; max-width:none; padding:var(--space-md) 20px; }
+.stat-grid { max-width:none; }
+.stat-grid li { min-height:108px; gap:14px; }
+.stat-grid strong { font-size:clamp(22px, 2.2vw, 30px); }
+.migration-flow { padding:28px; border-radius:28px; background:radial-gradient(ellipse at top, color-mix(in srgb, var(--wp-blue) 12%, transparent), transparent 70%); border:1px solid var(--wp-panel-line); gap:30px; }
+.migration-flow__row { position:relative; gap:18px; }
+.migration-flow__row::before { content:''; position:absolute; height:2px; left:5%; right:5%; top:50%; background:linear-gradient(90deg, var(--wp-blue), var(--color-brand-green)); }
+.migration-flow__card, .migration-flow__center { z-index:1; }
+.migration-flow__card { min-width:0; min-height:106px; display:flex; flex-direction:column; justify-content:center; }
+.migration-flow__card strong { font-size:var(--fs-caption); line-height:1.4; }
+.migration-flow__center { width:72px; height:72px; font-size:30px; border:6px solid var(--wp-band-from); }
+.migration-checklist { padding:22px; gap:18px; }
+.migration-checklist li { font-size:var(--fs-caption); line-height:1.5; }
+.migration-checklist__ring { width:125px; }
+.migration-checklist__ring fa-icon { display:grid; place-items:center; width:76px; height:76px; border:7px solid color-mix(in srgb, var(--color-brand-green) 20%, transparent); border-top-color:var(--color-brand-green); border-right-color:var(--color-brand-green); border-radius:50%; margin-bottom:var(--space-sm); }
+.hub--es { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-md); padding:100px 0 0; min-height:430px; align-content:start; }
+.hub--es .hub__center { position:absolute; top:0; left:50%; transform:translateX(-50%); width:78px; height:78px; font-size:30px; background:var(--wp-blue); }
+.hub--es::before { content:''; position:absolute; top:78px; left:50%; width:1px; height:22px; background:var(--wp-blue); }
+.hub--es .hub__card { position:relative; inset:auto; width:auto; max-width:none; min-height:100px; padding:var(--space-md); gap:12px; box-shadow:var(--shadow-sm); }
+.hub__card strong { font-size:var(--fs-caption); line-height:1.4; margin-bottom:var(--space-xs); }
+.hub__card span { font-size:11px; line-height:1.5; }
+.hub__card .tone-icon { width:36px; height:36px; font-size:17px; }
+.whitepaper-visual { padding:22px 0 65px; }
+.compare-photo { aspect-ratio:1.3; border-radius:28px; }
+.whitepaper-cover { left:20px; bottom:0; width:205px; padding:var(--space-lg); background:linear-gradient(145deg, var(--wp-blue), var(--color-brand-blue)); border:1px solid var(--wp-panel-line); }
+.whitepaper-cover h3 { font-size:var(--fs-body-lg); line-height:1.35; }
+.compare-card { right:12px; top:0; width:260px; display:block; border-radius:var(--radius-xl); padding:20px; }
+.compare-card li { min-height:32px; font-size:11px; }
+.story { display:flex; flex-direction:column; border-radius:var(--radius-2xl); }
+.story__quote { font-size:var(--fs-body-sm); line-height:1.6; margin:var(--space-md) 22px 0; flex:1; }
+.story__logo { margin:22px 22px 0; align-self:flex-start; object-fit:contain; max-width:calc(100% - 44px); }
+.story__cite { margin:var(--space-md) 22px 22px; }
+.pricing-grid { align-items:stretch; }
+.pricing-plan, .addon-panel { border-radius:var(--radius-2xl); padding:26px; }
+.pricing-plan__price { font-size:var(--fs-h1); letter-spacing:-1px; }
+.pricing-plan__features li { line-height:1.5; align-items:baseline; }
+.pricing-trust { min-width:0; }
+.final-cta { border:1px solid var(--wp-panel-line); }
+:where(.btn, .stories-arrows button):focus-visible { outline:3px solid var(--wp-blue); outline-offset:4px; }
+@media (max-width:1199px) and (min-width: 1024px) {
+  .pc-card { width:165px; }
+  .migration-flow { padding:18px; }
+  .migration-flow__row { gap:10px; }
+  .migration-flow__center { width:52px; height:52px; }
+  .zt-zone { padding-inline:12px; }
+  .zt-zone--allow { padding-right:44px; }
+  .zt-zone--deny { padding-left:44px; }
+  .zt-center { width:72px; }
+}
+@media (max-width:1023px) {
+  .split-section__visual { min-height:auto; }
+  .pc-visual { display:grid; grid-template-columns:1fr 1fr; padding:0; gap:var(--space-md); }
+  .pc-photo { display:block; position:relative; inset:auto; grid-column:1 / -1; aspect-ratio:1.5; }
+  .pc-card { position:static; width:auto; }
+  .zt-boundary { grid-template-columns:1fr; min-height:auto; }
+  .zt-zone { padding:var(--space-lg); }
+  .zt-center { display:flex; position:relative; top:auto; left:auto; transform:none; width:100%; height:70px; border-radius:0; grid-row:2; flex-direction:row; gap:14px; border:0; box-shadow:none; }
+  .zt-zone--deny { grid-row:3; }
+  .zt-server { max-width:none; font-size:13px; }
+  .zt-zone__label { font-size:11px; }
+  .world-map { min-height:auto; }
+  .whitepaper-cover, .compare-card { position:relative; inset:auto; width:auto; margin-top:var(--space-md); }
+  .whitepaper-visual { padding:0; }
+  .hub--es .hub__center { display:grid; }
+}
+@media (max-width:639px) {
+  .alt-section { padding-block:var(--wp-section-pad); }
+  .pc-visual { grid-template-columns:1fr; }
+  .pc-card { padding:var(--space-md); }
+  .pc-card strong { font-size:13px; }
+  .pc-card span { font-size:var(--fs-caption); }
+  .migration-flow { padding:18px; }
+  .migration-flow__row { flex-direction:column; }
+  .migration-flow__row::before { left:50%; top:0; bottom:0; height:auto; width:2px; right:auto; }
+  .migration-flow__card { width:100%; min-height:84px; }
+  .migration-checklist { align-items:stretch; }
+  .migration-checklist__ring { width:100%; padding-top:var(--space-md); border-top:1px solid var(--wp-panel-line); }
+  .hub--es { grid-template-columns:1fr; }
+  .stories-head__actions { flex-wrap:wrap; }
+  .stories-head__actions .btn { white-space:normal; }
+  .pricing-trust { width:100%; }
+  .final-cta { padding:var(--space-lg); }
+  .final-cta__actions { width:100%; }
+  .final-cta__actions .btn { width:100%; white-space:normal; }
+  .btn { white-space:normal; text-align:center; }
+}
+/* Keep supporting text selectors from overriding colored icon tiles. */
+.feature-grid .tone-icon, .feature-row .tone-icon, .stat-grid .tone-icon,
+.pc-card .tone-icon, .hub__card .tone-icon, .world-map__card .tone-icon,
+.pricing-trust .tone-icon, .addon-panel .tone-icon {
+  display:inline-grid; color:var(--tone); place-items:center;
+}
+.feature-grid .tone-icon { font-size:19px; }
+.feature-row .tone-icon { font-size:15px; }
+.stat-grid .tone-icon, .world-map__card .tone-icon, .pricing-trust .tone-icon, .addon-panel .tone-icon { font-size:19px; }
+.whitepaper-cover p { color:var(--primary-foreground); }
+.whitepaper-cover h3 { color:var(--primary-foreground); }
+.story__chip { background:var(--wp-panel); color:var(--wp-ink); }
+/* Horizontal trust strip above the CloudEdge plans. */
+.pricing-head { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr); align-items:center; gap:var(--space-lg); }
+.pricing-trust { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:0; padding:20px var(--space-md); border:1px solid var(--wp-panel-line); min-width:0; }
+.pricing-trust li { padding-inline:12px; min-width:0; }
+.pricing-trust li + li { border-left:1px solid var(--wp-panel-line); }
+.pricing-trust .tone-icon { width:38px; height:38px; }
+@media (max-width:1199px) {
+  .pricing-head { grid-template-columns:1fr; }
+  .pricing-trust { width:100%; }
+}
+@media (max-width:639px) {
+  .pricing-trust { grid-template-columns:1fr; padding:var(--space-sm) 20px; }
+  .pricing-trust li { padding:var(--space-md) 0; }
+  .pricing-trust li + li { border-left:0; border-top:1px solid var(--wp-panel-line); }
+}
+.pc-visual { display:block; min-height:auto; padding:0; }
+.pc-photo { display:block; position:relative; inset:auto; aspect-ratio:1417 / 1110; mask-image:none; -webkit-mask-image:none; }
+.pc-photo img { object-fit:contain; }
+/* Ecosystem strip follows the supplied horizontal service directory. */
+.ecosystem-strip-section { padding-block:var(--space-lg); }
+.ecosystem-strip { display:grid; grid-template-columns:300px minmax(0, 1fr); align-items:center; gap:var(--space-lg); padding:var(--space-lg) 28px; border:1px solid var(--wp-panel-line); border-radius:var(--radius-2xl); }
+.ecosystem-strip__intro { max-width:none; }
+.ecosystem-strip__eyebrow { font-size:11px; line-height:1.5; letter-spacing:1.4px; }
+.ecosystem-strip__heading { font-size:22px; letter-spacing:-.6px; }
+.ecosystem-strip__subtitle { font-size:13px; line-height:1.5; }
+.ecosystem-strip__tiles { display:grid; grid-template-columns:repeat(7, minmax(0, 1fr)); gap:0; }
+.ecosystem-tile { position:relative; align-items:flex-start; justify-content:flex-start; gap:12px; padding:0 var(--space-md); min-width:0; min-height:112px; border-left:1px solid var(--wp-panel-line); white-space:normal; }
+.ecosystem-tile__icon { width:48px; height:48px; border-radius:var(--radius-lg); font-size:22px; }
+.ecosystem-tile__label { display:block; padding-right:var(--space-sm); font-size:var(--fs-caption); line-height:1.45; text-align:left; white-space:normal; }
+.ecosystem-tile__chevron { position:absolute; right:6px; bottom:18px; font-size:11px; }
+@media (max-width:1399px) and (min-width: 1200px) {
+  .ecosystem-strip { grid-template-columns:260px minmax(0, 1fr); gap:var(--space-md); padding-inline:20px; }
+  .ecosystem-tile { padding-inline:12px; }
+  .ecosystem-strip__heading { font-size:20px; }
+}
+@media (max-width:1199px) {
+  .ecosystem-strip { grid-template-columns:1fr; gap:var(--space-lg); }
+  .ecosystem-strip__tiles { grid-template-columns:repeat(4, minmax(0, 1fr)); gap:20px 0; }
+  .ecosystem-tile { padding:12px 20px; }
+  .ecosystem-tile:nth-child(4n + 1) { border-left:0; }
+  .ecosystem-tile__chevron { right:16px; bottom:24px; }
+}
+@media (max-width:639px) {
+  .ecosystem-strip { padding:22px 18px; }
+  .ecosystem-strip__tiles { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:var(--space-md) 0; }
+  .ecosystem-tile { padding:var(--space-sm) 14px; min-height:112px; }
+  .ecosystem-tile:nth-child(odd) { border-left:0; }
+  .ecosystem-tile:nth-child(even) { border-left:1px solid var(--wp-panel-line); }
+  .ecosystem-tile__label { text-align:left; font-size:13px; padding-right:12px; }
+  .ecosystem-tile__chevron { right:10px; bottom:20px; }
+}
+/* White paper reference layout, with live guide and comparison text. */
+#compare-providers .split-section { grid-template-columns:minmax(0, 1.1fr) minmax(0, 1fr); gap:28px; }
+#compare-providers .split-section__copy { max-width:none; display:grid; grid-template-columns:minmax(0, 1fr) 205px; column-gap:20px; align-items:start; }
+#compare-providers .split-section__copy > .eyebrow,
+#compare-providers .split-section__copy > .section-heading,
+#compare-providers .split-section__copy > .section-subtitle { grid-column:1 / -1; }
+#compare-providers .feature-grid { grid-column:1; grid-row:4 / 6; grid-template-columns:1fr; gap:18px; }
+#compare-providers .whitepaper-cover { position:relative; inset:auto; grid-column:2; grid-row:4; width:100%; min-height:220px; margin:0; padding:22px 18px 54px; border-radius:var(--radius-md); background:var(--wp-panel); color:var(--wp-ink); overflow:hidden; }
+#compare-providers .whitepaper-cover::after { content:''; position:absolute; height:60px; left:-15%; right:-15%; bottom:-20px; border-radius:50%; transform:rotate(-12deg); background:linear-gradient(100deg, var(--wp-tone-sky), var(--wp-tone-green)); opacity:.35; }
+#compare-providers .whitepaper-cover h3 { font-size:var(--fs-body-lg); color:var(--wp-ink); }
+#compare-providers .whitepaper-cover p { color:var(--wp-body-strong); }
+#compare-providers .whitepaper-cover__brand { color:var(--wp-ink); margin-bottom:18px; }
+#compare-providers .whitepaper-cta { grid-column:2; grid-row:5; margin-top:14px; text-align:center; }
+#compare-providers .whitepaper-cta .btn { width:100%; padding-inline:10px; font-size:var(--fs-caption); }
+#compare-providers .whitepaper-visual { min-height:500px; padding:0; }
+#compare-providers .compare-photo { position:relative; width:70%; aspect-ratio:420 / 533; border-radius:var(--radius-2xl); overflow:hidden; }
+#compare-providers .compare-photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:30% 50%; }
+#compare-providers .compare-card { top:50px; right:0; width:280px; padding:22px; border-radius:var(--radius-xl); }
+#compare-providers .compare-card > strong { font-size:var(--fs-body-lg); margin-bottom:18px; }
+#compare-providers .compare-card li { min-height:40px; gap:10px; font-size:var(--fs-caption); }
+#compare-providers .compare-card li img { width:24px; height:24px; }
+#compare-providers .compare-card li span:first-of-type { width:100px; }
+@media (max-width:1199px) {
+  #compare-providers .split-section { grid-template-columns:1fr; }
+  #compare-providers .whitepaper-visual { min-height:auto; }
+  #compare-providers .compare-photo { width:60%; max-height:550px; }
+  #compare-providers .compare-card { position:absolute; width:45%; }
+}
+@media (max-width:639px) {
+  #compare-providers .split-section__copy { grid-template-columns:1fr; }
+  #compare-providers .feature-grid, #compare-providers .whitepaper-cover, #compare-providers .whitepaper-cta { grid-column:1; grid-row:auto; }
+  #compare-providers .whitepaper-cover { max-width:240px; margin-inline:auto; }
+  #compare-providers .whitepaper-cta { margin-bottom:20px; }
+  #compare-providers .compare-photo { width:100%; }
+  #compare-providers .compare-card { position:relative; inset:auto; width:100%; margin-top:18px; }
+}
+#compare-providers .compare-photo { aspect-ratio:400 / 533; }
+#compare-providers .compare-card { width:310px; }
+#compare-providers .compare-card__bar { min-width:46px; height:8px; }
+#compare-providers .compare-card__bar > span { height:100%; min-width:0; }
+@media (max-width:639px) { #compare-providers .compare-card { width:100%; } }
+/* Keep the full reference photo framing and comparison rows within their card. */
+#compare-providers .whitepaper-visual { min-height:auto; }
+#compare-providers .compare-photo { width:100%; aspect-ratio:800 / 533; max-height:none; }
+#compare-providers .compare-card { top:16%; right:5%; width:41%; max-width:none; min-height:49%; padding:18px; }
+#compare-providers .compare-card > strong { font-size:var(--fs-body); margin-bottom:12px; }
+#compare-providers .compare-card ul { gap:var(--space-sm); }
+#compare-providers .compare-card li { display:grid; grid-template-columns:22px minmax(0, 1fr) 46px 22px; gap:7px; min-height:34px; font-size:10px; }
+#compare-providers .compare-card li > img { width:22px; height:22px; }
+#compare-providers .compare-card li > span:first-of-type { width:auto; white-space:normal; overflow:visible; font-size:10px; }
+#compare-providers .compare-card__bar { width:46px; min-width:0; }
+#compare-providers .compare-card__price { font-size:10px; text-align:right; }
+@media (max-width:1199px) and (min-width: 640px) {
+  #compare-providers .compare-card { padding:var(--space-lg); }
+  #compare-providers .compare-card li { grid-template-columns:24px minmax(0, 1fr) 68px 24px; font-size:var(--fs-caption); }
+  #compare-providers .compare-card li > span:first-of-type { font-size:var(--fs-caption); }
+  #compare-providers .compare-card__bar { width:68px; }
+}
+@media (max-width:639px) {
+  #compare-providers .compare-photo { aspect-ratio:420 / 533; }
+  #compare-providers .compare-card { position:relative; inset:auto; width:100%; min-height:auto; padding:22px; }
+  #compare-providers .compare-card li { grid-template-columns:24px minmax(0, 1fr) 60px 24px; min-height:42px; }
+  #compare-providers .compare-card li > span:first-of-type { font-size:var(--fs-caption); }
+  #compare-providers .compare-card__bar { width:60px; }
+}
+#compare-providers .compare-photo { mask-image:linear-gradient(to right, transparent, black 3%); -webkit-mask-image:linear-gradient(to right, transparent, black 3%); }
+/* Success stories:reference layout with selectable customer content. */
+#stories { position:relative; isolation:isolate; }
+#stories::before { content:''; position:absolute; z-index:-1; right:3%; top:0; width:62%; height:290px; background:url('/worldposta-assets/hero/cloudedge/network-map.svg') center / contain no-repeat; opacity:.2; pointer-events:none; }
+#stories .stories-head { align-items:flex-start; flex-wrap:nowrap; }
+#stories .stories-head > div:first-child { max-width:650px; }
+#stories .stories-head .section-heading { font-size:clamp(32px, 3.6vw, 52px); line-height:1.12; }
+#stories .stories-head__actions { padding-top:22px; flex-shrink:0; }
+#stories .stories-head .section-subtitle { margin-bottom:0; }
+#stories .story { position:relative; min-width:0; padding-bottom:var(--space-xs); }
+#stories .story__photo { aspect-ratio:2.75; }
+#stories .story__chip { border-radius:var(--radius-lg); padding:10px 14px; }
+#stories .story__logo { height:32px; max-width:calc(100% - 2 * var(--space-lg)); margin:22px var(--space-lg) 0; background:var(--wp-panel); }
+#stories .story__quote { margin:14px var(--space-lg) 22px; font-size:var(--fs-body-sm); line-height:1.5; }
+#stories .story__cite { margin:14px 110px 22px var(--space-lg); font-size:var(--fs-caption); }
+.story__read-more { position:absolute; right:18px; bottom:32px; width:72px; padding-left:20px; border-left:1px solid var(--wp-panel-line); }
+.story__read-more summary { display:flex; flex-direction:column; align-items:center; gap:12px; list-style:none; cursor:pointer; color:var(--wp-ink); font-size:var(--fs-body-sm); font-weight:var(--fw-bold); line-height:1.4; text-align:center; }
+.story__read-more summary::-webkit-details-marker { display:none; }
+.story__read-more summary:focus-visible { outline:2px solid var(--wp-blue); outline-offset:5px; border-radius:var(--radius-md); }
+.story__read-arrow { display:grid; place-items:center; width:38px; height:38px; border-radius:50%; background:color-mix(in srgb, var(--wp-tone-green) 12%, var(--wp-panel)); color:var(--wp-tone-green); }
+.story__less-label { display:none; }
+.story__read-more[open] .story__less-label { display:inline; }
+.story__read-more[open] .story__read-label { display:none; }
+.story:has(.story__read-more[open]) .story__quote { display:block; -webkit-line-clamp:unset; }
+@media (max-width:1199px) {
+  #stories .stories-head { flex-wrap:wrap; }
+  #stories .stories-head__actions { padding-top:0; flex-wrap:wrap; }
+}
+@media (max-width:639px) {
+  #stories::before { width:100%; height:220px; }
+  #stories .story__photo { aspect-ratio:2.3; }
+  #stories .story__quote { font-size:13px; margin-left:18px; margin-right:18px; }
+  #stories .story__cite { margin-left:18px; margin-right:95px; }
+  #stories .story__logo { margin-left:18px; }
+  .story__read-more { right:12px; width:65px; padding-left:14px; }
+}
+
+/* Migration reference:artwork with selectable HTML labels and checklist. */
+#migration .split-section { grid-template-columns:1fr 1.2fr; gap:var(--space-lg); }
+#migration .section-heading { font-size:clamp(32px, 3.5vw, 52px); line-height:1.08; }
+#migration .split-section__visual { min-width:0; }
+.migration-flow { position:relative; display:block; aspect-ratio:900 / 660; padding:0; border:0; background:none; border-radius:0; }
+.migration-art { position:absolute; inset:0; overflow:hidden; border-radius:28px; mask-image:linear-gradient(to right, transparent, black 8%); }
+.migration-art img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.migration-flow__row { position:absolute; inset:0; display:block; }
+.migration-flow__row::before, .migration-flow__center { display:none; }
+.migration-flow__card { position:absolute; left:7.2%; top:19%; width:19%; height:28%; min-height:0; padding:14px; border:0; border-radius:17px; background:var(--wp-panel); }
+.migration-flow__card span { font-size:var(--fs-caption); text-transform:none; letter-spacing:0; color:var(--wp-ink); font-weight:var(--fw-bold); }
+.migration-flow__card strong { display:flex; flex-direction:column-reverse; align-items:flex-start; font-size:13px; }
+.migration-flow__card strong fa-icon { font-size:43px; color:var(--color-text-muted); margin-top:12px; }
+.migration-flow__card--done { left:74%; top:20%; width:20%; height:26%; }
+.migration-flow__card--done strong fa-icon { color:var(--color-brand-green); }
+.migration-flow__badge { font-size:26px; }
+.migration-checklist { position:absolute; left:7.5%; top:53%; width:40%; height:30%; padding:18px; border:0; border-radius:var(--radius-xl); gap:12px; }
+.migration-checklist li { font-size:11px; font-weight:var(--fw-regular); gap:var(--space-sm); }
+.migration-checklist ul { gap:12px; }
+.migration-checklist__ring { width:44%; }
+.migration-checklist__ring fa-icon { width:74px; height:74px; font-size:28px; margin-bottom:3px; }
+.migration-checklist__ring strong { font-size:10px; }
+.migration-checklist__ring span { font-size:10px; }
+@media (max-width:1100px) {
+  #migration .split-section { grid-template-columns:1fr; }
+  .migration-flow { width:min(100%, 800px); margin-inline:auto; }
+}
+@media (max-width:639px) {
+  .migration-flow__card { padding:10px; }
+  .migration-flow__card strong { font-size:10px; }
+  .migration-flow__card strong fa-icon { font-size:28px; margin-top:5px; }
+  .migration-flow__card span { font-size:10px; }
+  .migration-checklist { width:64%; height:auto; min-height:32%; top:56%; padding:12px; flex-direction:row; align-items:center; }
+  .migration-checklist li { font-size:9px; }
+  .migration-checklist ul { gap:7px; }
+  .migration-checklist__ring { width:42%; padding-top:0; border:0; }
+  .migration-checklist__ring fa-icon { width:48px; height:48px; font-size:20px; border-width:5px; }
+}
+
+/* Global infrastructure reference with live statistics and map label. */
+#global-business .split-section { grid-template-columns:1fr 1.08fr; gap:var(--space-lg); }
+#global-business .section-heading { font-size:clamp(32px, 3.3vw, 50px); line-height:1.12; }
+#global-business .stat-grid { gap:var(--space-md); margin-bottom:0; }
+#global-business .stat-grid li { min-height:108px; padding:18px; border-radius:19px; box-shadow:var(--shadow-sm); }
+#global-business .stat-grid strong { font-size:clamp(24px, 2.6vw, 38px); }
+#global-business .stat-grid div > span { display:block; margin-top:7px; font-size:var(--fs-body); }
+#global-business .stat-grid .tone-icon { width:64px; height:64px; flex:0 0 64px; border-radius:var(--radius-xl); font-size:28px; }
+.world-map { display:block; padding:0; min-height:0; aspect-ratio:830 / 660; }
+.world-map__art { position:absolute; inset:0; overflow:hidden; border-radius:28px; mask-image:linear-gradient(to right, transparent, black 3%); }
+/* Lit continents on the left; the Global Reach card sits over open space on the right. */
+.world-map__art img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:30% 50%; }
+.world-map__card { right:7.3%; top:27.1%; width:38.5%; min-height:15.5%; padding:17px; border-radius:var(--radius-xl); gap:12px; background:var(--wp-panel); }
+.world-map__card strong { font-size:19px; line-height:1.25; }
+.world-map__card div > span { margin-top:5px; font-size:15px; line-height:1.3; }
+.world-map__card .tone-icon { width:32px; height:32px; flex:0 0 32px; border-radius:50%; font-size:0; }
+.world-map__card .tone-icon::after { content:''; width:15px; height:15px; border-radius:50%; background:var(--color-action); }
+@media (max-width:1100px) {
+  #global-business .split-section { grid-template-columns:1fr; }
+  .world-map { width:min(100%, 760px); margin-inline:auto; }
+}
+@media (max-width:639px) {
+  #global-business .stat-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
+  #global-business .stat-grid li { padding:13px; flex-direction:column; align-items:flex-start; gap:12px; }
+  #global-business .stat-grid .tone-icon { width:48px; height:48px; flex-basis:48px; font-size:22px; }
+  #global-business .stat-grid strong { font-size:25px; }
+  #global-business .stat-grid div > span { font-size:13px; }
+  .world-map__card { padding:10px; gap:7px; border-radius:var(--radius-lg); }
+  .world-map__card strong { font-size:var(--fs-caption); }
+  .world-map__card div > span { font-size:10px; }
+  .world-map__card .tone-icon { width:22px; height:22px; flex-basis:22px; }
+  .world-map__card .tone-icon::after { width:10px; height:10px; }
+}
+.world-map { aspect-ratio:800 / 660; }
+.world-map__card { right:7.5%; width:40%; }
+@media (min-width:640px) {
+  #global-business .stat-grid strong { font-size:clamp(24px, 2.15vw, 32px); white-space:nowrap; }
+  #global-business .stat-grid div > span { font-size:var(--fs-body-sm); }
+}
+
+/* Reference security topology, with selectable workload labels. */
+#zero-trust .split-section { grid-template-columns:1fr 1.15fr; gap:var(--space-lg); }
+#zero-trust .section-heading { font-size:clamp(32px, 3.6vw, 54px); line-height:1.05; }
+.security-heading-caption { display:block; font-size:.53em; line-height:1.25; margin-top:5px; }
+#zero-trust .feature-row { grid-template-columns:repeat(4, minmax(0, 1fr)); gap:18px; }
+#zero-trust .feature-row li + li { border-left:1px solid var(--wp-panel-line); padding-left:18px; }
+#zero-trust .feature-row .tone-icon { width:48px; height:48px; font-size:23px; border-radius:13px; }
+.security-loop { aspect-ratio:4 / 3; }
+@media (max-width:1100px) {
+  #zero-trust .split-section { grid-template-columns:1fr; }
+  .security-loop { width:min(100%, 820px); margin-inline:auto; }
+}
+@media (max-width:639px) {
+  #zero-trust .feature-row { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  #zero-trust .feature-row li + li { border:0; padding-left:0; }
+}
+
+/* Benefits and ecosystem share the same centered card boundaries. */
+.trust-bar-section { background:linear-gradient(180deg, var(--wp-band-from), var(--wp-band-to)); border-bottom:0; }
+.trust-bar { margin-inline:auto; padding:20px 28px; border:1px solid var(--wp-panel-line); border-radius:var(--radius-2xl); background:var(--wp-panel); box-shadow:var(--wp-panel-shadow); }
+@media (min-width:1200px) and (max-width: 1399px) {
+  .trust-bar { padding-inline:20px; }
+}
+@media (max-width:639px) {
+  .trust-bar { padding-inline:18px; }
+  .trust-bar li { white-space:normal; }
+}
+
+/* Desktop: the photo is the section background, pinned to the right edge at
+   its own 3:2 (so the floating cards stay on the cloud), dissolving into the
+   hero gradient behind the copy and fading at top and foot. From 1440px it is
+   the hero's full 640px height (960 wide); narrower, it scales down so its
+   cloud always starts past the copy column (~412px in) instead of sliding
+   under the text. Only the image is masked, not the cards. */
+@media (min-width:1024px) {
+  .hero-photo { top:50%; bottom:auto; left:auto; right:0; width:min(960px, calc(100vw - 412px)); aspect-ratio:1.5; transform:translateY(-50%); border-radius:0; overflow:visible; -webkit-mask-image:none; mask-image:none; }
+  .hero-photo__img {
+    -webkit-mask-image:linear-gradient(to right, transparent, #000 32%), linear-gradient(to bottom, transparent, #000 10%, #000 82%, transparent);
+    -webkit-mask-composite:source-in;
+    mask-image:linear-gradient(to right, transparent, #000 32%), linear-gradient(to bottom, transparent, #000 10%, #000 82%, transparent);
+    mask-composite:intersect;
+  }
+  /* The photo is a bright daylight scene: tone it down on the dark theme. */
+  :host-context([data-theme='dark']) .hero-photo__img img { filter:brightness(.78) saturate(.92); }
+}
+
+/* Balance the hero copy vertically against the full photograph. */
+@media (min-width:1024px) {
+  .hero__content { min-height:560px; display:flex; align-items:center; padding-top:var(--space-xl); padding-bottom:var(--space-xl); }
+  .hero-copy { padding-top:0; }
+  .hero-copy__actions { margin-bottom:0; }
+}
+
+/* Dedicated infrastructure visual keeps the complete isolated environment visible. */
+.pc-photo { aspect-ratio:4 / 3; box-shadow:none; }
+.pc-photo img { object-fit:contain; }
+
+

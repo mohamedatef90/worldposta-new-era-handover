@@ -1,0 +1,136 @@
+<app-site-header />
+
+<main class="home-page" id="main-content" tabindex="-1">
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero__cloud hero__cloud--one" aria-hidden="true"></div>
+    <div class="hero__cloud hero__cloud--two" aria-hidden="true"></div>
+
+
+    <div class="hero__content ds-container" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">Cloud Infrastructure</p>
+        <h1 id="hero-heading" class="hero-palette">
+          Scalable Cloud
+          <span class="text-blue hero-palette-blue">Infrastructure</span>
+          <span class="text-green hero-palette-green">for Real Business.</span>
+        </h1>
+        <p class="hero-copy__description">
+          Cloud infrastructure for your business.
+        </p>
+
+        <ul class="proof-points" aria-label="CloudEdge benefits">
+          @for (point of proofPoints; track point.title) {
+            <li>
+              <span class="proof-icon"><fa-icon [icon]="point.icon" aria-hidden="true" /></span>
+              <span><strong>{{ point.title }}</strong></span>
+            </li>
+          }
+        </ul>
+
+        <div class="hero-copy__actions">
+          <a class="primary-cta" href="https://admin.worldposta.com/auth/register" target="_blank" rel="noopener noreferrer">Get Started Free <fa-icon [icon]="icons.arrowRight" aria-hidden="true" /><span class="sr-only">(opens in a new tab)</span></a>
+          <a class="secondary-cta" href="/contact">Talk to Sales</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="console-shell">
+          <div class="console-shell__chrome" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <p>CloudEdge Console <span>Live infrastructure overview</span></p>
+          </div>
+          <img
+            [ngSrc]="heroConsoleImage()"
+            width="1600"
+            height="900"
+            priority
+            alt="CloudEdge Console dashboard showing cloud resources and security metrics"
+          />
+        </div>
+        <!-- CloudEdge Console in its mobile layout; figures mirror the console screenshot. -->
+        <div class="ce-phone" role="img" aria-label="CloudEdge Console on mobile: CPU, memory, storage and active VM usage, and a security score of 87%">
+          <div class="ce-phone__screen" aria-hidden="true">
+            <div class="ce-phone__status"><span>9:41</span><span class="ce-phone__signals"><i></i><i></i><i></i></span></div>
+            <div class="ce-phone__topbar">
+              <span class="ce-phone__menu">≡</span>
+              <span class="ce-phone__brand"><img ngSrc="/worldposta-assets/hero/cloudedge/cloudedge-mark.avif" width="96" height="96" alt="" />CloudEdge</span>
+              <span class="ce-phone__bell"><b>1</b></span>
+            </div>
+            <div class="ce-phone__title"><strong>CloudEdge Console</strong><span>+ Create VM</span></div>
+            <div class="ce-phone__stats">
+              <div style="--tone:#f97316;--fill:70%"><small>CPU CORES</small><strong>45<em> / 64</em></strong><i></i><span>70% utilized</span></div>
+              <div style="--tone:#3b82f6;--fill:71%"><small>MEMORY</small><strong>182<em> / 256 GB</em></strong><i></i><span>71% utilized</span></div>
+              <div style="--tone:#22c55e;--fill:71%"><small>STORAGE</small><strong>1456<em> / 2048</em></strong><i></i><span>71% utilized</span></div>
+              <div style="--tone:#679a41;--fill:67%"><small>ACTIVE VMS</small><strong>12<em> / 18</em></strong><i></i><span>Uptime: 99.8%</span></div>
+            </div>
+            <div class="ce-phone__card">
+              <div class="ce-phone__card-head"><strong>Security Score</strong><span>ACTIVE</span></div>
+              <div class="ce-phone__security">
+                <span class="ce-phone__ring">87%</span>
+                <dl>
+                  <div><dt>Active Threats</dt><dd class="is-red">2</dd></div>
+                  <div><dt>Blocked Attempts</dt><dd>156</dd></div>
+                  <div><dt>SSL Certificates</dt><dd class="is-green">8 valid</dd></div>
+                </dl>
+              </div>
+            </div>
+            <div class="ce-phone__card ce-phone__card--peek">
+              <div class="ce-phone__card-head"><strong>Network Status</strong><span>HEALTHY</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-card floating-card--cloud"><fa-icon [icon]="icons.cloud" aria-hidden="true" /><span><strong>Your Private Cloud</strong><small>Full control. Maximum security.</small></span></div>
+        <div class="floating-card floating-card--security"><fa-icon [icon]="icons.lock" aria-hidden="true" /><span><strong>99.99% availability</strong><small>Infrastructure you can rely on.</small></span></div>
+      </div>
+    </div>
+
+  </section>
+  <nav appPageJumpNav [links]="[{ href: '/#ecosystem-section-heading', label: 'Explore products' }, { href: '/#performance-heading', label: 'Infrastructure' }, { href: '/#security-heading', label: 'Security' }, { href: '/contact', label: 'Talk to an expert' }]"></nav>
+
+  <section class="ecosystem-strip-section" aria-labelledby="ecosystem-heading">
+    <div class="ecosystem-strip ds-container">
+      <div class="ecosystem-strip__intro">
+        <p class="ecosystem-strip__eyebrow">Also part of the WorldPosta ecosystem</p>
+        <h2 id="ecosystem-heading" class="ecosystem-strip__heading">Posta Workspace</h2>
+        <p class="ecosystem-strip__subtitle">Business email, calendars, files, notes and team communication</p>
+      </div>
+      <nav class="ecosystem-strip__tiles" aria-label="Collaboration and Productivity services">
+        @for (tile of ecosystemTiles; track tile.label) {
+          @if (tile.href) {
+            <a class="ecosystem-tile" [class]="tile.colorClass" [href]="tile.href" [attr.aria-label]="tile.label">
+              <ng-container [ngTemplateOutlet]="tileBody" [ngTemplateOutletContext]="{ $implicit: tile }" />
+            </a>
+          } @else {
+            <span class="ecosystem-tile" [class]="tile.colorClass">
+              <ng-container [ngTemplateOutlet]="tileBody" [ngTemplateOutletContext]="{ $implicit: tile, static: true }" />
+            </span>
+          }
+        }
+      </nav>
+      <ng-template #tileBody let-tile let-static="static">
+        <span class="ecosystem-tile__icon">
+          @if (tile.logo) {
+            <img [ngSrc]="tile.logo" [width]="tile.logoWidth!" [height]="tile.logoHeight!" alt="" />
+          } @else {
+            <fa-icon [icon]="tile.icon!" aria-hidden="true" />
+          }
+        </span>
+        <span class="ecosystem-tile__label">
+          {{ tile.label }}
+          @if (!static) {
+            <fa-icon class="ecosystem-tile__chevron" [icon]="icons.chevronRight" aria-hidden="true" />
+          }
+        </span>
+      </ng-template>
+    </div>
+  </section>
+
+  <app-ecosystem-tabs [homeMode]="true" />
+  <app-performance-trust />
+  <app-security-section />
+  <app-why-worldposta />
+  <app-get-started />
+</main>
+
+<app-site-footer [homeMode]="true" />
+

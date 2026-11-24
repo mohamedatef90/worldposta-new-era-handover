@@ -1,0 +1,210 @@
+<app-site-header [solid]="true" />
+<main id="main-content" tabindex="-1">
+<section class="hero" aria-labelledby="migration-title">
+  <div class="copy">
+    <p class="eyebrow"><span></span> Seamless Migration</p>
+    <h1 id="migration-title" class="hero-palette">Move <span class="hero-palette-blue">Anywhere.</span><br><span class="hero-palette-green">Zero Downtime.</span></h1>
+    <p class="lead">Move your workloads, applications and data from physical, virtual or cloud environments to your target cloud or data center with confidence and without disrupting your business.</p>
+    <ul class="benefits">
+      <li><span class="benefit-icon green" aria-hidden="true">↻</span><strong>Zero<br>Downtime</strong></li>
+      <li><span class="benefit-icon blue" aria-hidden="true"><svg viewBox="0 0 32 32"><ellipse cx="16" cy="7" rx="9" ry="4"/><path d="M7 7v18c0 5 18 5 18 0V7M7 13c0 5 18 5 18 0M7 19c0 5 18 5 18 0"/></svg></span><strong>100%<br>Data Integrity</strong></li>
+      <li><span class="benefit-icon purple" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 3c4 4 8 5 11 5v9c0 6-6 10-11 13C11 27 5 23 5 17V8c3 0 7-1 11-5Z"/></svg></span><strong>Secure<br>Migration</strong></li>
+    </ul>
+    <div class="actions"><a class="primary" href="/seamless-migration#start-your-migration">Talk to a Migration Expert <span aria-hidden="true">→</span></a><a class="secondary" href="/seamless-migration#how-it-works">See How It Works <span class="play" aria-hidden="true">▷</span></a></div>
+  </div>
+  <div class="migration-art">
+      <img ngSrc="/worldposta-assets/migration-hero-cloud-campus.avif" width="1800" height="1350" priority alt="On-premises server racks connected by a data path to a data center campus on a cloud: migrate to your target cloud or data center without disrupting your business." />
+    </div>
+  </section>
+  <nav appPageJumpNav [links]="[{ href: '/seamless-migration#environments-title', label: 'Environments' }, { href: '/seamless-migration#how-it-works', label: 'Our process' }, { href: '/seamless-migration#migration-security', label: 'Security' }, { href: '/seamless-migration#start-your-migration', label: 'Plan your migration' }]"></nav>
+
+<section class="challenge mc" aria-labelledby="challenge-title">
+    <div class="mc-top">
+      <div class="challenge-copy"><p class="eyebrow"><span></span>The Migration Challenge</p>
+      <h2 id="challenge-title">Migration Is Complex.<br><span>The Risks Are Real.</span></h2>
+      <p>Moving workloads, applications or data is a critical step. Without the right expertise and planning, it can be challenging, time-consuming and risky.</p>
+    </div>
+      <div class="mc-art"><img ngSrc="/worldposta-assets/migration-challenge-3d.avif" width="1800" height="1350" alt="Tangled servers, cables and a cracked database with warning markers: potential downtime, data loss risks, security threats and application issues." /></div>
+    </div>
+    <ul class="mc-risks">
+      <li><span class="challenge-icon pink" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="15"/><path d="M20 10v11l8 5"/></svg></span><h3>Business Disruption</h3><p>Even short periods of downtime can impact your operations, customers and revenue.</p></li>
+      <li><span class="challenge-icon blue" aria-hidden="true"><svg viewBox="0 0 40 40"><ellipse cx="20" cy="10" rx="13" ry="6"/><path d="M7 10v20c0 8 26 8 26 0V10M7 20c0 8 26 8 26 0"/></svg></span><h3>Data Loss Risks</h3><p>Moving large volumes of data can increase the risk of loss or corruption.</p></li>
+      <li><span class="challenge-icon green" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 4 34 9v12c0 7-8 12-14 15C14 33 6 28 6 21V9Z"/><path d="m13 20 5 5 10-11"/></svg></span><h3>Security Threats</h3><p>Your data and applications need to stay protected throughout the migration.</p></li>
+      <li><span class="challenge-icon amber" aria-hidden="true">⚙</span><h3>Application Complexity</h3><p>Mission-critical applications, such as SAP, Oracle and custom systems, require expert handling.</p></li>
+    </ul>
+  </section>
+<section class="environments me" aria-labelledby="environments-title">
+  <div class="me-head">
+    <div><p class="eyebrow"><span></span>What Can We Migrate?</p><h2 id="environments-title">Move Any Environment.<br><span>Same Reliability.</span></h2><p class="environments-lead">WPSYS helps you migrate workloads, applications and data across environments securely, efficiently and without downtime.</p></div>
+    <div class="me-art"><img ngSrc="/worldposta-assets/migration-environments-3d.avif" width="1800" height="1013" alt="A server, virtual machines, a cloud, a data center and hybrid systems streaming into one cloud platform, with the CloudEdge console on the monitor." /></div>
+  </div>
+  <div class="me-grid">
+    @for (environment of migrationEnvironments; track environment.kind) {
+      <article class="me-tile">
+        <span [class]="'challenge-icon '+environment.color" aria-hidden="true"><svg viewBox="0 0 40 40"><path [attr.d]="environment.icon" /></svg></span>
+        <h3>{{environment.title}}</h3><p>{{environment.description}}</p>
+</article>
+    }
+  </div>
+  <div class="critical-support">
+    <span class="challenge-icon green" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 4 34 9v12c0 7-8 12-14 15C14 33 6 28 6 21V9Z"/><path d="m13 20 5 5 10-11"/></svg></span>
+    <div><h3>Support for Mission-Critical Applications</h3><p>From ERP and databases to custom applications, we ensure a smooth and secure migration for your most critical workloads.</p></div>
+    <a href="/seamless-migration#start-your-migration">Talk to a Migration Expert <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+<section class="migration-process mp" id="how-it-works" aria-labelledby="process-title">
+    <div class="mp-top">
+    <div class="mp-head"><div><p class="eyebrow"><span></span>How It Works</p><h2 id="process-title">A Structured Approach<br><span>for a Seamless Migration.</span></h2><p>We follow a proven, step-by-step process to ensure your migration is secure, efficient and without disruption.</p></div></div>
+    <div class="mp-art"><img ngSrc="/worldposta-assets/migration-process-pipeline.avif" width="2048" height="706" alt="A six-station migration pipeline: assess, plan, migrate, validate, switch and optimize." /></div>
+  </div>
+    <ol class="mp-steps">
+      @for (step of migrationSteps; track step.number) {
+        <li [attr.data-tone]="step.color"><span class="mp-n">{{step.number}}</span><h3>{{step.title}}</h3><p>{{step.description}}</p></li>
+      }
+    </ol>
+    <div class="critical-support process-support">
+    <span class="challenge-icon blue" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 4 34 9v12c0 7-8 12-14 15C14 33 6 28 6 21V9Z"/></svg></span>
+    <div><h3>Your Migration. Our Expertise.</h3><p>From planning through post-migration, we manage the complexity<br class="desktop-break"> so you can focus on your business.</p></div>
+    <a href="/seamless-migration#start-your-migration">Talk to a Migration Expert <span aria-hidden="true">→</span></a>
+  </div>
+  </section>
+
+<section class="migration-partner wp2" id="why-wpsys" aria-labelledby="partner-title">
+  <div class="wp2-top">
+    <div class="wp2-copy">
+      <p class="eyebrow"><span></span>Why WPSYS?</p>
+      <h2 id="partner-title">A Trusted Partner for<br><span>Mission-Critical Migrations.</span></h2>
+      <p class="partner-lead">We combine deep technical expertise, proven tools and best practices to deliver a secure, efficient and worry-free migration experience.</p>
+      <ul class="wp2-cards">
+        @for (benefit of partnerBenefits; track benefit.title) {
+          <li [attr.data-tone]="benefit.color"><span class="wp2-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path [attr.d]="benefit.icon"/></svg></span><h3>{{benefit.title}}</h3><p>{{benefit.description}}</p></li>
+        }
+      </ul>
+    </div>
+    <div class="wp2-art">
+      <img ngSrc="/worldposta-assets/migration-partner-team.avif" width="1600" height="1200" alt="WPSYS migration engineers reviewing live status dashboards together." />
+      <section class="wp2-glass" aria-labelledby="business-needs-title">
+        <h3 id="business-needs-title">Built for Your Business Needs</h3>
+        <p>Whether you’re migrating a single application or your entire IT environment, WPSYS adapts to your requirements with a secure and scalable approach.</p>
+        <ul>@for (need of businessNeeds; track need) {<li><span aria-hidden="true">✓</span>{{need}}</li>}</ul>
+      </section>
+    </div>
+  </div>
+  <div class="critical-support partner-support">
+    <span class="challenge-icon blue" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="m20 3 5 3 6 1 2 6 3 5-3 5-2 6-6 1-5 3-5-3-6-1-2-6-3-5 3-5 2-6 6-1ZM15 31l-5 8-2-6-6 1 5-9M25 31l5 8 2-6 6 1-5-9"/><circle cx="20" cy="18" r="7"/></svg></span>
+    <div><h3>Your Success Is Our Commitment.</h3><p>We go beyond migration to ensure a stable, secure and optimized environment<br class="desktop-break"> that supports your long-term business growth.</p></div>
+    <a href="/seamless-migration#start-your-migration">Talk to a Migration Expert <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+<section class="enterprise-applications ea" id="enterprise-applications" aria-labelledby="applications-title">
+  <div class="ea-top">
+    <div class="ea-copy">
+      <p class="eyebrow"><span></span>Enterprise Applications</p>
+      <h2 id="applications-title">Migrate Your Critical<br><span>Applications with Confidence.</span></h2>
+      <p class="applications-lead">Our experience in migrating complex, business-critical applications helps ensure a smooth transition with minimal disruption.</p>
+    </div>
+    <div class="ea-art"><img ngSrc="/worldposta-assets/migration-applications-3d.avif" width="1800" height="1350" alt="Four application blocks, for ERP, databases, email and custom apps, lifting into one cloud." /></div>
+  </div>
+  <ul class="ea-apps">
+        <li><span class="application-symbol sap-symbol blue" aria-hidden="true"><b>SAP</b></span><h3>SAP</h3><p>Migrate and optimize your SAP environment with zero downtime and full data integrity.</p></li>
+        <li><span class="application-symbol pink" aria-hidden="true"><svg viewBox="0 0 40 40"><ellipse cx="20" cy="10" rx="13" ry="6"/><path d="M7 10v20c0 8 26 8 26 0V10M7 20c0 8 26 8 26 0"/></svg></span><h3>Oracle</h3><p>Secure migration for Oracle databases and applications with minimal business impact.</p></li>
+        <li><span class="application-symbol exchange-symbol green" aria-hidden="true"><i></i><b>E</b></span><h3>Microsoft Exchange</h3><p>Migrate your email and collaboration environment seamlessly and securely.</p></li>
+        <li><span class="application-symbol amber" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M16 4h8l2 5 5-1 5 6-3 5 3 5-5 6-5-1-2 6h-8l-2-6-5 1-5-6 3-5-3-5 5-6 5 1Z"/><circle cx="20" cy="20" r="6"/></svg></span><h3>Custom Applications</h3><p>We tailor the migration of custom and line-of-business applications to your needs.</p></li>
+  </ul>
+  <div class="critical-support applications-support">
+    <span class="challenge-icon green" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M10 31h22c10 0 10-15 1-16C31 3 15 2 12 14 1 13 0 30 10 31Z"/></svg></span>
+    <div><h3>Any Application. Any Environment.</h3><p>From enterprise systems to custom applications, we ensure a secure<br class="desktop-break"> and efficient migration tailored to your business needs.</p></div>
+    <a href="/seamless-migration#start-your-migration">Talk to a Migration Expert <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+<section class="migration-security ms" id="migration-security" aria-labelledby="migration-security-title">
+  <div class="ms-top">
+    <div class="ms-copy"><p class="eyebrow"><span></span>Security During Migration</p><h2 id="migration-security-title">Your Data Stays Secure<br><span>at Every Step.</span></h2><p>We follow industry best practices and use advanced security measures to protect your data, applications and infrastructure throughout the migration.</p></div>
+    <div class="ms-art"><img ngSrc="/worldposta-assets/migration-security-3d.avif" width="1800" height="1350" alt="Locked data blocks moving through a sealed tunnel with checkpoints from a server to the cloud, guarded by a shield." /></div>
+  </div>
+  <ul class="ms-strip">
+    @for (feature of migrationSecurity; track feature.title) {
+      <li><span [class]="'challenge-icon '+feature.color" aria-hidden="true"><svg viewBox="0 0 40 40"><path [attr.d]="feature.icon"/></svg></span><h3>{{feature.title}}</h3><p>{{feature.description}}</p></li>
+    }
+  </ul>
+  <div class="critical-support migration-security-support">
+    <span class="challenge-icon blue" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 4 34 9v12c0 7-8 12-14 15C14 33 6 28 6 21V9Z"/></svg></span>
+    <div><h3>Security Is Built Into Everything We Do.</h3><p>From planning to post-migration, we ensure your data and business<br class="desktop-break"> stay protected at every stage.</p></div>
+    <a href="/seamless-migration#start-your-migration">Talk to a Migration Expert <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+<section class="migration-technology mt2" id="migration-technology" aria-labelledby="technology-title">
+  <div class="mt2-head">
+    <div><p class="eyebrow"><span></span>Technology Behind the Migration</p><h2 id="technology-title">Powered by<br><span>Industry-Leading Technology.</span></h2></div>
+    <p>We use proven tools and automation to deliver a fast, secure and efficient migration tailored to your environment.</p>
+  </div>
+  <div class="mt2-body">
+    <div class="mt2-art"><img ngSrc="/worldposta-assets/migration-technology-stack.avif" width="1200" height="1600" alt="A layered migration technology stack of backup, data, network, load balancing and automation under a cloud." /></div>
+  <div class="technology-grid">
+    @for (technology of migrationTechnologies; track technology.title) {
+      <article>
+        <div [class]="'technology-mark '+technology.brand" aria-hidden="true">
+          @if (technology.brand === 'veeam') {<span>veeam</span>}
+          @else if (technology.brand === 'rackware') {<svg viewBox="0 0 48 36"><path d="M12 29h25c11 0 11-16 1-17C37 0 19-3 15 10 2 8-2 28 12 29Z"/></svg><span>RACKWARE</span>}
+          @else if (technology.brand === 'veritas') {<span>VERITAS<span class="registered">®</span></span>}
+          @else {<svg [class]="technology.color" viewBox="0 0 40 40"><path [attr.d]="technology.icon"/></svg>}
+        </div>
+        <h3>{{technology.title}}</h3><p>{{technology.description}}</p>
+        <ul>@for (feature of technology.features; track feature) {<li><span [class]="'technology-check '+technology.color" aria-hidden="true">✓</span>{{feature}}</li>}</ul>
+      </article>
+    }
+  </div>
+  </div>
+  <div class="critical-support technology-support">
+    <span class="challenge-icon blue" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M10 31h22c10 0 10-15 1-16C31 3 15 2 12 14 1 13 0 30 10 31Z"/></svg></span>
+    <div><h3>The Right Tools. The Right Expertise.</h3><p>We combine industry-leading technology with deep expertise<br class="desktop-break"> to deliver a smooth, secure and efficient migration experience.</p></div>
+    <a href="/seamless-migration#start-your-migration">Talk to a Migration Expert <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+<!-- Same visible heading as the consultation section; a distinct name keeps the landmarks unique. -->
+<section class="final-migration fa2" id="start-your-migration" aria-label="Start your migration">
+  <div class="final-copy">
+    <p class="eyebrow"><span></span>Let’s Plan Your Migration</p><h2 id="final-migration-title">Ready to Migrate<br><span>with Confidence?</span></h2>
+    <p class="final-lead">Talk to our experts and get a migration plan tailored to your business needs. We’ll help you assess, plan and migrate with minimal disruption and maximum business value.</p>
+    <div class="final-benefits">
+      <article><span class="challenge-icon green" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 4C0 4 0 29 12 31l-2 6 9-5c22 0 24-28 1-28Z"/><path d="M12 18h1m6 0h1m6 0h1"/></svg></span><h3>Free Consultation</h3><p>Discuss your needs with our experts.</p></article>
+      <article><span class="challenge-icon blue" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M9 3h17l7 7v27H9ZM25 3v9h8M14 18h13M14 25h13M14 32h9"/></svg></span><h3>Tailored Migration Plan</h3><p>Get a plan designed for your environment.</p></article>
+      <article><span class="challenge-icon purple" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M14 26C13 14 25 5 36 4c0 12-9 24-21 24ZM23 14a4 4 0 1 1 8 0 4 4 0 0 1-8 0M14 17H7l-4 9h11M23 28v7l-9 4V28M9 30l-5 6"/></svg></span><h3>Start Your Journey</h3><p>Move forward with confidence.</p></article>
+    </div>
+    <div class="fa2-art"><img ngSrc="/worldposta-assets/migration-final-plan-wide.avif" width="2400" height="800" alt="A migration plan checklist and calendar beside a server, with a rocket heading to the cloud." /></div>
+  </div>
+  <form class="final-form consultation-form" (submit)="submitFinalEnquiry($event)" aria-label="Migration start request">
+    <h3 id="final-form-title">Talk to a Migration Expert</h3><p class="form-intro">Fill in your details and our team will get in touch with you shortly.</p>
+    <div class="form-fields">
+      <div><label class="field-label" for="final-first-name">First Name *</label><input id="final-first-name" name="firstName" autocomplete="given-name" placeholder="First Name *" required maxlength="80"></div>
+      <div><label class="field-label" for="final-last-name">Last Name *</label><input id="final-last-name" name="lastName" autocomplete="family-name" placeholder="Last Name *" required maxlength="80"></div>
+      <div class="full-field"><label class="field-label" for="final-email">Business Email *</label><input id="final-email" name="email" type="email" autocomplete="email" placeholder="Business Email *" required maxlength="254"></div>
+      <div class="full-field"><label class="field-label" for="final-company">Company Name *</label><input id="final-company" name="company" autocomplete="organization" placeholder="Company Name *" required maxlength="160"></div>
+      <div><label class="field-label" for="final-phone">Phone Number *</label><input id="final-phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone Number *" required maxlength="40"></div>
+      <div><label class="field-label" for="final-country">Country *</label><input id="final-country" name="country" autocomplete="country-name" placeholder="Country *" required maxlength="100" list="migration-countries"><datalist id="migration-countries"><option value="Egypt"></option><option value="Saudi Arabia"></option><option value="United Arab Emirates"></option><option value="United Kingdom"></option><option value="United States"></option><option value="Germany"></option><option value="India"></option><option value="South Africa"></option></datalist></div>
+      <div class="full-field"><label class="field-label" for="final-type">What are you looking to migrate? *</label><select id="final-type" name="migrationType" required><option value="">What are you looking to migrate? *</option><option>Physical to Cloud</option><option>Virtual to Cloud</option><option>Cloud to Cloud</option><option>Data Center to Cloud</option><option>Hybrid Environments</option><option>Enterprise Applications</option><option>Email &amp; Collaboration</option><option>Other</option></select></div>
+      <div class="full-field"><label class="field-label" for="final-details">Additional Details (Optional)</label><textarea id="final-details" name="details" placeholder="Additional Details (Optional)" rows="4" maxlength="4000"></textarea></div>
+    </div>
+    <label class="contact-consent"><input type="checkbox" name="consent" required><span>I agree to be contacted by the WPSYS team regarding my inquiry.</span></label>
+    <button type="submit">Submit Request <span aria-hidden="true">→</span></button>
+    <p class="form-note">Opens your email app so you can review and send your request.</p><p class="enquiry-status" role="status">{{finalEnquiryStatus()}}</p>
+  </form>
+</section>
+</main>
+<app-site-footer />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

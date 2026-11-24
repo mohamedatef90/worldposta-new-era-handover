@@ -1,0 +1,279 @@
+:host{display:block;background:var(--wp-sap-surface)}
+.sap-hero{position:relative;isolation:isolate;overflow:hidden;margin-top:80px;min-height:644px;padding-block:var(--wp-section-pad);display:flex;align-items:center;background:var(--wp-sap-surface)}
+.sap-copy{width:min(1440px,90%);margin-inline:auto;position:relative}
+.eyebrow{display:flex;align-items:center;gap:22px;font-size:var(--fs-body-sm);font-weight:var(--fw-bold);color:var(--wp-sap-muted);margin:0 0 30px}
+.eyebrow span{width:46px;height:2px;background:var(--wp-sap-green)}
+h1{font-size:clamp(44px,4.55vw,74px);line-height:.96;font-weight:var(--fw-bold);letter-spacing:-2.8px;color:var(--color-text-primary);margin:0 0 22px;max-width:710px}
+h1 span{color:var(--color-brand-green)}
+.lead{font-size:clamp(18px,1.55vw,24px);line-height:1.25;max-width:650px;font-weight:var(--fw-medium);color:var(--wp-sap-muted);margin:0 0 var(--space-xl)}
+.actions{display:flex;gap:18px;flex-wrap:wrap;max-width:700px}
+.actions a{display:flex;align-items:center;justify-content:center;gap:20px;padding:17px 26px;border-radius:var(--radius-md);min-height:56px;font-size:var(--fs-body-lg);font-weight:var(--fw-semibold);text-decoration:none;border:1px solid var(--wp-sap-blue);transition:transform .2s}
+.actions a:hover{transform:translateY(-2px)}
+.actions .primary{background:var(--wp-sap-button);border-color:var(--wp-sap-button);color:var(--wp-sap-white)}
+.actions .secondary{color:var(--wp-sap-blue);background:var(--wp-sap-surface)}
+.actions a span{font-size:25px;font-weight:var(--fw-regular)}
+.actions a:focus-visible{outline:3px solid var(--wp-sap-blue);outline-offset:5px}
+.benefits{display:flex;list-style:none;padding:0;margin:36px 0 0;max-width:780px;gap:var(--space-lg)}
+.benefits li{display:flex;align-items:center;gap:var(--space-md);position:relative;flex:1 0 auto}
+.benefits li+li{border-left:1px solid var(--wp-hairline);padding-left:var(--space-lg)}
+.benefits strong,.benefits small{display:block;font-size:var(--fs-body);line-height:1.4;white-space:nowrap}
+.benefits strong{color:var(--wp-sap-ink);font-weight:var(--fw-bold)}
+.benefits small{color:var(--wp-sap-muted)}
+.icon{width:62px;height:62px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,currentColor 10%,transparent)}
+.green{color:var(--wp-sap-green)}
+.blue{color:var(--wp-sap-blue)}
+.purple{color:var(--wp-tone-purple)}
+svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(min-width:1700px){.sap-hero{min-height:720px}}
+@media(max-width:1100px){h1{font-size:60px}.lead{max-width:580px}.sap-copy{width:90%}}
+@media(max-width:850px){.benefits{gap:14px;flex-wrap:wrap}.benefits li{flex:none;width:100%}.benefits li+li{border-left:0;padding-left:0}}
+@media(max-width:760px){.sap-hero{display:flex;flex-direction:column;align-items:stretch;min-height:0}.sap-copy{order:0}h1{font-size:clamp(40px,8vw,60px);letter-spacing:-1.8px}.eyebrow{margin-bottom:var(--space-lg)}.lead{font-size:var(--fs-body-lg);line-height:1.5}.actions{gap:12px}.actions a{width:100%;font-size:var(--fs-body)}.benefits{gap:14px;flex-wrap:wrap;margin-top:28px}.benefits li{flex:none;width:100%}.benefits li+li{border-left:0;padding-left:0}.icon{width:48px;height:48px}}
+@media(prefers-reduced-motion:reduce){.actions a{transition:none}}
+.sap-operations{position:relative;isolation:isolate;overflow:hidden;padding-block:var(--wp-section-pad);background:var(--color-bg-primary);color:var(--color-text-primary)}
+.operations-wrap{width:min(1440px,90%);margin-inline:auto}
+.operations-copy{width:55%;position:relative;z-index:1}
+.sap-operations .eyebrow{color:var(--color-text-secondary);margin-bottom:var(--space-lg)}
+.sap-operations .eyebrow span{background:var(--color-action)}
+.operations-copy h2{font-size:clamp(32px,3.4vw,56px);line-height:1.08;letter-spacing:-1.7px;font-weight:var(--fw-bold);margin:0 0 18px;color:var(--color-text-primary)}
+.operations-copy h2 span{color:var(--color-brand-green)}
+.operations-lead{font-size:clamp(17px,1.4vw,22px);line-height:1.4;font-weight:var(--fw-medium);color:var(--color-text-secondary);margin:0 0 var(--space-lg)}
+.operations-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md)}
+.operations-grid article{display:flex;gap:20px;align-items:flex-start;padding:22px 18px;border-radius:var(--radius-xl);border:1px solid var(--color-border);background:var(--color-bg-secondary)}
+.operations-grid h3{margin:0 0 var(--space-sm);font-size:var(--fs-body-lg);line-height:1.25;font-weight:var(--fw-bold);color:var(--color-text-primary)}
+.operations-grid p,.operation-outcome p{margin:0;font-size:15px;line-height:1.4;color:var(--color-text-secondary)}
+.operation-icon{display:grid;place-items:center;flex-shrink:0;width:72px;height:72px;border-radius:50%;background:color-mix(in srgb,currentColor 10%,transparent)}
+.hosting{color:var(--color-brand-green)}
+.clustering{color:var(--wp-blue)}
+.optimization{color:var(--wp-tone-purple)}
+.support{color:var(--wp-tone-amber)}
+.operations-strip{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr 1.2fr;align-items:center;gap:var(--space-lg);margin-top:28px;padding:22px 28px;background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-xl)}
+.operation-outcome{display:flex;gap:18px;align-items:center}
+.operation-outcome+.operation-outcome{border-left:1px solid var(--color-border);padding-left:var(--space-lg)}
+.operation-outcome .operation-icon{width:60px;height:60px}
+.operation-outcome h3{font-size:var(--fs-body);font-weight:var(--fw-bold);line-height:1.3;margin:0 0 6px;color:var(--color-text-primary)}
+.operations-cta{display:flex;align-items:center;justify-content:center;gap:20px;min-height:56px;padding:var(--space-md);text-decoration:none;border-radius:var(--radius-md);background:var(--color-action);color:var(--color-text-on-brand,white);font-size:17px;font-weight:var(--fw-bold)}
+.operations-cta:hover{background:var(--color-action-hover)}
+.operations-cta:focus-visible{outline:3px solid var(--wp-blue);outline-offset:4px}
+@media(max-width:1200px){.operations-copy{width:60%}.operations-grid article{gap:12px;padding:18px 14px}.operations-grid .operation-icon{width:48px;height:48px}.operations-grid h3{font-size:var(--fs-body)}.operations-strip{grid-template-columns:1fr 1fr;gap:var(--space-lg)}.operation-outcome+.operation-outcome{border:0;padding-left:0}}
+@media(max-width:850px){.operations-copy{width:100%}.sap-operations{display:flex;flex-direction:column}.operations-copy h2{font-size:clamp(32px,5.5vw,46px)}.operations-strip{margin-top:var(--space-lg)}}
+@media(max-width:560px){.operations-grid{grid-template-columns:1fr}.operations-grid article{padding:20px}.operations-grid .operation-icon{width:60px;height:60px}.operations-grid h3{font-size:var(--fs-body-lg)}.operations-strip{grid-template-columns:1fr;padding:var(--space-lg)}}
+.sap-continuous{position:relative;isolation:isolate;overflow:hidden;padding-block:var(--wp-section-pad);background:var(--color-bg-primary);color:var(--color-text-primary)}
+.continuous-copy{width:49%;position:relative;z-index:1}
+.sap-continuous .eyebrow{color:var(--color-text-secondary);margin-bottom:20px}
+.sap-continuous .eyebrow span{background:var(--color-action)}
+.continuous-copy h2{font-size:clamp(36px,3.6vw,60px);line-height:1.02;letter-spacing:-1.8px;font-weight:var(--fw-bold);margin:0 0 18px;color:var(--color-text-primary)}
+.continuous-copy h2 span{color:var(--color-brand-green)}
+.sap-continuous .operations-lead{font-size:clamp(17px,1.3vw,21px);margin-bottom:20px;line-height:1.4}
+.sap-continuous .operations-grid article{padding:18px var(--space-md);gap:var(--space-md)}
+.sap-continuous .operations-grid .operation-icon{width:62px;height:62px}
+@media(max-width:1200px){.continuous-copy{width:55%}.sap-continuous .operations-grid article{gap:12px}.sap-continuous .operations-grid .operation-icon{width:46px;height:46px}}
+@media(max-width:850px){.continuous-copy{width:100%}.sap-continuous{display:flex;flex-direction:column}.continuous-copy h2{font-size:clamp(36px,6vw,52px)}}
+@media(max-width:560px){.sap-continuous .operations-grid .operation-icon{width:60px;height:60px}}
+.sap-contact{padding-block:var(--wp-section-pad);background:var(--color-bg-primary);color:var(--color-text-primary);overflow:hidden}
+.contact-wrap{width:min(1440px,90%);margin-inline:auto;display:grid;grid-template-columns:1.85fr 1fr;gap:40px;align-items:start}
+.contact-copy{position:relative;isolation:isolate;min-width:0}
+.sap-contact .eyebrow{color:var(--color-text-secondary);margin-bottom:var(--space-lg)}
+.sap-contact .eyebrow span{background:var(--color-action)}
+.contact-copy h2{color:var(--color-text-primary);font-size:clamp(34px,3.4vw,56px);font-weight:var(--fw-bold);line-height:1.08;letter-spacing:-1.8px;margin:0 0 18px}
+.contact-copy h2 span{color:var(--color-brand-green)}
+.contact-lead{font-size:clamp(18px,1.35vw,22px);line-height:1.4;color:var(--color-text-secondary);max-width:730px;margin:0 0 28px}
+.sap-enquiry{padding:var(--space-xl);border:1px solid var(--color-border);border-radius:22px;background:var(--color-bg-secondary);position:relative;z-index:1;box-shadow:var(--shadow-sm)}
+.sap-enquiry>h3{font-size:30px;line-height:1.2;font-weight:var(--fw-bold);letter-spacing:-.8px;color:var(--color-text-primary);margin:0 0 12px}
+.sap-enquiry>p{font-size:var(--fs-body);line-height:1.4;color:var(--color-text-secondary);margin:0 0 22px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid label{display:block;font-size:13px;font-weight:var(--fw-semibold);color:var(--color-text-secondary);min-width:0}
+.form-grid .full{grid-column:1/-1}
+.form-grid input,.form-grid select,.form-grid textarea{display:block;width:100%;min-height:44px;margin-top:6px;padding:10px 12px;background:var(--color-bg-primary);color:var(--color-text-primary);border:1px solid var(--color-border);border-radius:var(--radius-md);font:inherit;font-size:15px;box-sizing:border-box}
+.form-grid textarea{resize:vertical;min-height:88px}
+.contact-consent{display:flex;gap:12px;align-items:flex-start;margin:18px 0;font-size:var(--fs-body-sm);line-height:1.4;color:var(--color-text-secondary)}
+.contact-consent input{width:20px;height:20px;flex-shrink:0;accent-color:var(--color-brand-green)}
+.sap-enquiry button{width:100%;min-height:52px;border:0;border-radius:var(--radius-md);font:inherit;font-weight:var(--fw-bold);color:var(--color-text-on-brand,white);background:var(--color-action);display:flex;justify-content:center;align-items:center;gap:20px;cursor:pointer}
+.sap-enquiry button:hover{background:var(--color-action-hover)}
+.sap-enquiry:is(input,select,textarea,button):focus-visible{outline:3px solid var(--wp-blue);outline-offset:3px}
+.sap-enquiry .form-note{font-size:var(--fs-caption);text-align:center;margin:14px 0 0}
+.sap-enquiry .form-status{font-size:var(--fs-body-sm);margin:12px 0 0}
+.form-status:empty{display:none}
+@media(max-width:1200px){.contact-wrap{grid-template-columns:1.3fr 1fr;gap:var(--space-lg)}.contact-copy h2{font-size:var(--fs-h1)}.sap-enquiry{padding:var(--space-lg)}.sap-enquiry>h3{font-size:26px}}
+@media(max-width:850px){.contact-wrap{grid-template-columns:1fr;gap:var(--space-xl)}.contact-copy h2{font-size:clamp(34px,6vw,46px)}}
+@media(max-width:560px){.form-grid{grid-template-columns:1fr}.sap-enquiry{padding:22px}.sap-contact .eyebrow{font-size:var(--fs-caption);gap:12px}}
+.sap-partner{position:relative;isolation:isolate;overflow:hidden;padding-block:var(--wp-section-pad);background:var(--color-bg-primary);color:var(--color-text-primary)}
+.sap-partner .eyebrow{color:var(--color-text-secondary);margin-bottom:var(--space-lg)}
+.sap-partner .eyebrow span{background:var(--color-action)}
+.partner-lead{font-size:clamp(18px,1.4vw,22px);line-height:1.4;color:var(--color-text-secondary);margin:0 0 26px}
+.sap-partner-logos{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:26px;padding-top:22px;border-top:1px solid var(--color-border);background:var(--wp-sap-white);border-radius:0 0 var(--radius-md) var(--radius-md);padding:22px 12px 12px}
+.sap-partner-logos>*{max-width:110px;object-fit:contain;flex-shrink:0}
+.sap-partner-logos span{font-size:var(--fs-h3);font-weight:var(--fw-bold)}
+.suse{color:var(--wp-brand-suse,var(--wp-green))}
+.veeam{color:var(--wp-brand-veeam,var(--wp-green));letter-spacing:-1px}
+.veritas{color:var(--wp-brand-veritas,var(--wp-brand-crimson));font-size:20px!important}
+.cisco{color:var(--wp-brand-cisco,var(--wp-blue));text-align:center;line-height:.8;letter-spacing:2px}
+@media(max-width:1250px){.sap-partner-logos{flex-wrap:wrap;justify-content:center}}
+.sap-services{position:relative;isolation:isolate;overflow:hidden;padding-block:var(--wp-section-pad);background:var(--color-bg-primary);color:var(--color-text-primary)}
+.services-copy{position:relative;width:58%;z-index:1}
+.sap-services .eyebrow{color:var(--color-text-secondary);margin-bottom:var(--space-lg)}
+.sap-services .eyebrow span{background:var(--color-action)}
+.services-copy h2{font-size:clamp(34px,3.5vw,58px);line-height:1.06;letter-spacing:-1.8px;font-weight:var(--fw-bold);margin:0 0 20px;color:var(--color-text-primary)}
+.services-copy h2 span{color:var(--color-brand-green)}
+.services-lead{font-size:clamp(18px,1.4vw,22px);line-height:1.4;color:var(--color-text-secondary);max-width:730px;margin:0 0 28px}
+.sap-services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sap-services-grid article{padding:20px;border:1px solid var(--color-border);border-radius:var(--radius-xl);background:var(--color-bg-secondary)}
+.sap-services-grid .operation-icon{width:58px;height:58px;margin-bottom:14px}
+.sap-services-grid h3{font-size:var(--fs-body-lg);font-weight:var(--fw-bold);line-height:1.25;color:var(--color-text-primary);margin:0 0 var(--space-sm)}
+.sap-services-grid p{font-size:15px;line-height:1.4;color:var(--color-text-secondary);margin:0}
+.services-cta{width:fit-content;min-width:330px;margin-top:20px}
+.services-art{position:absolute;inset:0 0 auto;z-index:-1;overflow:hidden;clip-path:inset(0 0 0 58%);height:100%}
+@media(max-width:1200px){.services-copy{width:65%}.services-art{clip-path:inset(0 0 0 63%)}.sap-services-grid article{padding:var(--space-md)}.sap-services-grid h3{font-size:var(--fs-body)}}
+@media(max-width:850px){.services-copy{width:100%}.sap-services{display:flex;flex-direction:column}.services-art{position:relative;order:1;inset:auto;clip-path:none;height:400px;margin-top:28px;z-index:0}.services-copy h2{font-size:clamp(34px,6vw,48px)}}
+@media(max-width:560px){.sap-services-grid{grid-template-columns:1fr 1fr;gap:12px}.sap-services-grid article{padding:var(--space-md) 12px}.sap-services-grid h3{font-size:var(--fs-body)}.sap-services-grid p{font-size:var(--fs-body-sm)}.services-cta{width:100%;min-width:0;box-sizing:border-box}.services-art{height:340px}}
+@media(max-width:360px){.sap-services-grid{grid-template-columns:1fr}}
+.sap-success{padding-block:var(--wp-section-pad);background:var(--color-bg-primary);color:var(--color-text-primary)}
+.sap-success .eyebrow{color:var(--color-text-secondary);margin-bottom:var(--space-lg)}
+.sap-success .eyebrow span{background:var(--color-action)}
+.sap-success h2{font-size:clamp(36px,4.4vw,72px);line-height:1.08;letter-spacing:-2px;font-weight:var(--fw-bold);margin:0 0 var(--space-md);color:var(--color-text-primary)}
+.sap-success h2 span{color:var(--color-brand-green)}
+.success-lead{max-width:1050px;font-size:clamp(18px,1.4vw,22px);line-height:1.4;margin:0 0 28px;color:var(--color-text-secondary)}
+.success-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
+.success-card{border:1px solid var(--color-border);border-radius:var(--radius-xl);overflow:hidden;background:var(--color-bg-secondary)}
+.success-photo{position:relative;aspect-ratio:464/177;overflow:hidden}
+.industry{position:absolute;left:14px;top:14px;padding:9px var(--space-md);border-radius:30px;background:var(--color-bg-secondary);color:var(--color-text-primary);font-size:var(--fs-body-sm);font-weight:var(--fw-bold);box-shadow:var(--shadow-sm)}
+.success-card-copy{padding:22px}
+.success-card h3{font-size:21px;line-height:1.2;font-weight:var(--fw-bold);margin:0 0 10px;color:var(--color-text-primary)}
+.success-card-copy>p{font-size:var(--fs-body);line-height:1.4;margin:0;color:var(--color-text-secondary);min-height:68px}
+.success-benefits{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0;margin:var(--space-lg) 0;font-size:13px;line-height:1.4;color:var(--color-text-secondary)}
+.success-benefits li{position:relative;padding-top:var(--space-xl)}
+.success-benefits li:before{content:'✓';position:absolute;top:0;left:0;border-radius:50%;width:25px;height:25px;display:grid;place-items:center;color:var(--color-brand-green);background:color-mix(in srgb,var(--color-brand-green) 12%,transparent);font-weight:var(--fw-bold)}
+.success-benefits li+li{border-left:1px solid var(--color-border);padding-left:12px}
+.success-benefits li+li:before{left:12px}
+.success-card details{border-top:1px solid var(--color-border);padding-top:var(--space-md)}
+.success-card summary{cursor:pointer;color:var(--wp-blue);font-size:15px;font-weight:var(--fw-bold);list-style:none;display:flex;align-items:center;gap:14px;min-height:32px}
+.success-card summary::-webkit-details-marker{display:none}
+.success-card details[open] summary span{transform:rotate(90deg)}
+.success-card details p{margin:14px 0 0;font-size:15px;line-height:1.5;color:var(--color-text-secondary)}
+.success-card summary:focus-visible{outline:3px solid var(--wp-blue);outline-offset:4px;border-radius:var(--radius-sm)}
+.success-strip{display:grid;grid-template-columns:auto 1fr 1.4fr 1.3fr;align-items:center;gap:28px;padding:var(--space-lg) 28px;margin-top:28px;border:1px solid var(--color-border);border-radius:var(--radius-xl);background:var(--color-bg-secondary)}
+.success-strip>img{background:var(--wp-sap-white);border-radius:var(--radius-md);padding:var(--space-sm);box-sizing:content-box}
+.success-strip h3{font-size:26px;line-height:1.15;font-weight:var(--fw-bold);margin:0;color:var(--color-text-primary)}
+.success-strip h3 span{color:var(--color-brand-green)}
+.success-strip p{font-size:17px;line-height:1.4;margin:0;color:var(--color-text-secondary)}
+@media(max-width:1100px){.success-grid{gap:var(--space-md)}.success-card-copy{padding:18px}.success-card h3{font-size:var(--fs-body-lg)}.success-benefits{gap:var(--space-sm);font-size:var(--fs-caption)}.success-strip{grid-template-columns:auto 1fr}.success-strip .operations-cta{width:100%}}
+@media(max-width:760px){.success-grid{grid-template-columns:1fr}.success-card-copy>p{min-height:0}.success-card h3{font-size:22px}.success-benefits{font-size:var(--fs-body-sm)}.success-strip{grid-template-columns:1fr;gap:20px}.success-strip h3{font-size:26px}.sap-success h2{letter-spacing:-1px}.success-photo{max-height:280px}}
+.success-photo .industry{min-width:170px;text-align:center;box-sizing:border-box}
+.sap-closing{position:relative;isolation:isolate;overflow:hidden;padding-block:var(--wp-section-pad);background:var(--color-bg-primary);color:var(--color-text-primary)}
+.closing-wrap{width:min(1440px,90%);margin:auto;display:grid;grid-template-columns:1.75fr 1fr;gap:var(--space-xl);align-items:center;box-sizing:border-box}
+.closing-copy{min-width:0;position:relative;z-index:1}
+.sap-closing .eyebrow{font-size:var(--fs-caption);color:var(--color-text-secondary);margin-bottom:22px;gap:18px}
+.sap-closing .eyebrow span{background:var(--color-action);width:40px;flex-shrink:0}
+.closing-copy h2{font-size:clamp(32px,2.8vw,46px);line-height:1.08;letter-spacing:-1.5px;font-weight:var(--fw-bold);margin:0 0 20px;color:var(--color-text-primary)}
+.closing-copy h2 span{color:var(--color-brand-green)}
+.closing-lead{font-size:19px;line-height:1.4;color:var(--color-text-secondary);margin:0 0 28px}
+.closing-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);list-style:none;padding:0;margin:0}
+.closing-benefits li{display:flex;gap:10px;align-items:flex-start}
+.closing-benefits .operation-icon{width:46px;height:46px}
+.closing-benefits svg{width:26px;height:26px}
+.closing-benefits h3{font-size:var(--fs-body-sm);line-height:1.3;font-weight:var(--fw-bold);margin:0 0 6px;color:var(--color-text-primary)}
+.closing-benefits p{font-size:13px;line-height:1.4;margin:0;color:var(--color-text-secondary)}
+.sap-closing .sap-partner-logos{margin-top:36px;gap:12px;flex-wrap:wrap}
+.sap-closing .sap-partner-logos>*{max-width:82px}
+.sap-closing .sap-partner-logos span{font-size:20px}
+@media(max-width:1300px){.closing-wrap{padding-right:0;grid-template-columns:1.5fr 1fr}.closing-copy h2{font-size:var(--fs-h1)}}
+@media(max-width:850px){.closing-wrap{grid-template-columns:1fr;gap:var(--space-xl)}.closing-copy h2{font-size:clamp(32px,6vw,46px)}.closing-benefits{gap:20px}}
+@media(max-width:560px){.closing-benefits{grid-template-columns:1fr}.closing-benefits h3{font-size:17px}.closing-benefits p{font-size:15px}.closing-benefits .operation-icon{width:52px;height:52px}.closing-copy h2 br{display:none}.closing-copy h2 .hero-palette-green{display:block}.sap-closing .eyebrow{gap:12px;line-height:1.4}.closing-lead{font-size:var(--fs-body-lg)}}
+@media(min-width:851px){.sap-operations .operations-wrap{display:grid;grid-template-columns:1.12fr 1fr;gap:0 var(--space-xl);align-items:stretch}.sap-operations .operations-copy{display:contents}.sap-operations .operations-copy>.eyebrow,.sap-operations .operations-copy>h2,.sap-operations .operations-lead{grid-column:1/-1;max-width:800px}.sap-operations .operations-grid{grid-column:1;grid-row:4}.sap-operations .operations-grid article{min-height:215px}.sap-operations .operations-strip{grid-column:1/-1;margin-top:var(--space-lg)}}
+@media(max-width:850px){.sap-operations .operations-strip{margin-top:var(--space-lg)}}
+@media(min-width:851px){.sap-continuous .operations-wrap,.sap-services .operations-wrap{display:grid;grid-template-columns:1.12fr 1fr;gap:0 var(--space-xl);align-items:stretch}.sap-continuous .continuous-copy,.sap-services .services-copy{display:contents}.sap-continuous .continuous-copy>.eyebrow,.sap-continuous .continuous-copy>h2,.sap-continuous .operations-lead,.sap-services .services-copy>.eyebrow,.sap-services .services-copy>h2,.sap-services .services-lead{grid-column:1/-1;max-width:850px}.sap-continuous .operations-grid,.sap-services .sap-services-grid{grid-column:1;grid-row:4}.sap-continuous .operations-grid article{min-height:185px}.sap-services .services-art{position:relative;inset:auto;grid-column:2;grid-row:4;height:auto;min-height:0;max-height:none;clip-path:none;z-index:0;border-radius:var(--radius-xl);overflow:hidden}.sap-continuous .operations-strip{grid-column:1/-1;margin-top:var(--space-lg)}.sap-services .services-cta{grid-column:1/-1;justify-self:start}}
+/* ============================================================
+   Visuals (replacing the AI reference renders)
+   ============================================================ */
+/* Hero: from 1200px the photo is the section background, pinned right at 3:2
+   and starting past the copy column (min left 700px) so the headline never
+   sits on the bright photo; it blends in from the left. Narrower, it drops
+   under the copy as a framed photo. Status cards float over it on desktop. */
+/* Anchored to the hero's bottom so its foot fade ends at the section edge;
+   640px wide keeps its height inside the hero's 570px photo area, so the
+   top fade is not clipped either. */
+.sap-art{position:absolute;z-index:-1;bottom:0;right:0;width:min(640px,calc(100% - 700px));aspect-ratio:1600/1422}
+.sap-art__img{position:absolute;inset:0;-webkit-mask-image:linear-gradient(to right,transparent,rgba(0,0,0,.35) 16%,#000 38%),linear-gradient(to bottom,transparent,#000 10%,#000 86%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,rgba(0,0,0,.35) 16%,#000 38%),linear-gradient(to bottom,transparent,#000 10%,#000 86%,transparent);mask-composite:intersect}
+.sap-art__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;--parallax:100px}
+:host-context([data-theme='dark']) .sap-art__img img{filter:brightness(.74) saturate(.92)}
+@media(max-width:1199px){.sap-hero{flex-direction:column;align-items:stretch;min-height:0}.sap-art{position:relative;order:1;inset:auto;left:auto;transform:none;width:90%;margin:var(--space-xl) auto 0;border-radius:20px;overflow:hidden}.sap-art__img{-webkit-mask-image:none;mask-image:none}.sap-art__img img{--parallax:0px}}
+/* Coded visuals in the right column of Operations and Always-On. */
+@media(min-width:851px){
+  .sap-operations .operations-visual{grid-column:2;grid-row:4}
+  .sap-continuous .continuous-visual{grid-column:2;grid-row:4}
+}
+@media(max-width:850px){.operations-visual,.continuous-visual{order:1;margin-top:var(--space-lg)}}
+/* Partner: a tower photo down the right edge, blending in from the left. */
+.partner-building{position:absolute;top:0;bottom:0;right:0;width:20%;z-index:-1;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,#000 55%);mask-image:linear-gradient(to right,transparent,#000 55%)}
+/* Services, stories and closing: whole photos, cropped with object-fit. */
+.services-art{border-radius:var(--radius-xl)}
+/* Zoomed toward the laptop so its SAP Operations Center screen reads at this size. */
+.services-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.success-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.closing-photo{position:relative;aspect-ratio:4/3;border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.closing-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+.closing-cta{width:fit-content;min-width:300px;margin-top:28px;box-sizing:border-box}
+@media(max-width:850px){.closing-photo{max-width:600px}}
+@media(max-width:560px){.closing-cta{width:100%;min-width:0}}
+/* The ecosystem strip is always white, so its wordmarks use fixed, AA-safe
+   brand tones rather than theme tokens that lighten in dark mode. */
+.sap-partner-logos .suse{color:#1f7a32}
+.sap-partner-logos .cisco{color:#0a6ea8}
+.sap-partner-logos .veritas{color:#b4122e}
+
+/* ============================================================
+   Get Expert Support: the three benefits as a numbered timeline beside the
+   form (fills the column height), with the three outcomes as a light row.
+   ============================================================ */
+.contact-benefits{counter-reset:step;display:grid;gap:0;max-width:600px;margin:0;padding:0;list-style:none}
+.contact-benefits li{position:relative;display:grid;grid-template-columns:72px minmax(0,1fr);gap:20px;align-items:start;padding-bottom:30px}
+.contact-benefits li:not(:last-child)::before{content:'';position:absolute;left:35px;top:80px;bottom:6px;width:2px;border-radius:2px;background:linear-gradient(to bottom,color-mix(in srgb,var(--color-brand-green) 45%,var(--color-border)),var(--color-border))}
+.contact-benefits h3{margin:4px 0 6px;font-size:19px;line-height:1.3;font-weight:var(--fw-bold);color:var(--color-text-primary)}
+.contact-benefits h3::before{counter-increment:step;content:counter(step,decimal-leading-zero);display:block;margin-bottom:4px;font-size:var(--fs-caption);font-weight:var(--fw-bold);letter-spacing:2px;color:var(--color-text-secondary)}
+.contact-benefits p{margin:0;font-size:var(--fs-body);line-height:1.45;color:var(--color-text-secondary)}
+.contact-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:var(--space-sm);padding-top:22px;border-top:1px solid var(--color-border)}
+.contact-outcomes strong{display:block;font-size:var(--fs-body);color:var(--color-text-primary)}
+.contact-outcomes strong::before{content:'✓';display:inline-grid;place-items:center;width:20px;height:20px;margin-right:8px;border-radius:50%;font-size:11px;color:#fff;background:var(--color-action)}
+.contact-outcomes p{margin:6px 0 0;font-size:var(--fs-body-sm);line-height:1.45;color:var(--color-text-secondary)}
+@media(max-width:560px){.contact-benefits li{grid-template-columns:56px minmax(0,1fr);gap:14px}.contact-benefits li:not(:last-child)::before{left:27px;top:64px}.contact-benefits .operation-icon{width:56px;height:56px}.contact-outcomes{grid-template-columns:1fr;gap:var(--space-md)}}
+
+/* ============================================================
+   Why WorldPosta: pitch, logos and tower photo on top; every reason in one
+   grid below (4 strengths + 5 advantages, same card style).
+   ============================================================ */
+.partner-wrap{width:min(1440px,90%);margin:auto}
+.partner-intro{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:var(--space-2xl);align-items:stretch}
+.partner-copy{min-width:0;align-self:center}
+.partner-copy h2{font-size:clamp(34px,3.6vw,60px);line-height:1.06;letter-spacing:-1.8px;font-weight:var(--fw-bold);margin:0 0 20px}
+.partner-copy .sap-partner-logos{margin-top:var(--space-lg)}
+.partner-photo{position:relative;min-height:320px;border-radius:24px;box-shadow:var(--shadow-lg)}
+.partner-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 45%}
+.partner-grid-title{margin:var(--space-2xl) 0 var(--space-lg);font-size:var(--fs-h3);line-height:1.3;font-weight:var(--fw-bold);color:var(--color-text-primary)}
+.partner-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-md);margin:0;padding:0;list-style:none}
+.partner-grid li{display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:var(--radius-xl);border:1px solid var(--color-border);background:var(--color-bg-secondary)}
+.partner-grid .operation-icon{width:52px;height:52px}
+.partner-grid .operation-icon svg{width:26px;height:26px}
+.partner-grid h4{margin:2px 0 6px;font-size:17px;line-height:1.3;font-weight:var(--fw-bold);color:var(--color-text-primary)}
+.partner-grid p{margin:0;font-size:15px;line-height:1.45;color:var(--color-text-secondary)}
+@media(max-width:1100px){.partner-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:850px){.partner-intro{grid-template-columns:1fr;gap:var(--space-xl)}.partner-photo{min-height:0;aspect-ratio:16/9}.partner-copy h2{font-size:clamp(34px,6vw,48px)}}
+@media(max-width:560px){.partner-grid{grid-template-columns:1fr}.sap-partner-logos{flex-wrap:wrap;justify-content:center}}
+
+/* Compact contact: steps keep their natural rhythm and the form is trimmed
+   to sit level with them, instead of stretching the copy to a tall form. */
+.contact-benefits li{padding-bottom:22px}
+.contact-benefits li:not(:last-child)::before{top:78px;bottom:0}
+.contact-outcomes{margin-top:4px;padding-top:20px}
+.sap-enquiry{padding:28px}
+.sap-enquiry>h3{font-size:26px;margin:0 0 6px}
+.sap-enquiry>p{font-size:var(--fs-body-sm);margin:0 0 18px}
+.form-grid{gap:12px}
+.form-grid input,.form-grid select,.form-grid textarea{margin-top:4px;padding:8px 12px}
+.form-grid textarea{min-height:64px}
+.contact-consent{margin:14px 0}
+.sap-enquiry button{min-height:48px}
+.sap-enquiry .form-note{margin-top:10px}
+@media(min-width:851px){.contact-wrap{align-items:center}}
+/* Two columns leave the ninth card alone; let it take the full row. */
+@media(min-width:561px) and (max-width:1100px){
+  .partner-grid li:last-child:nth-child(odd){grid-column:1/-1}
+}
